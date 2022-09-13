@@ -1,26 +1,27 @@
 package com.example.javachess.console.game;
 
-import com.example.javachess.console.common.InputHandler;
+import com.example.javachess.console.common.GameStatusManager;
+import com.example.javachess.console.common.InputProvider;
 
 public class Game {
 
     private MC chessMC;
 
-    private final static String START_INPUT = "start";
-    private final static String END_INPUT = "end";
 
     public Game(MC chessMC) {
         this.chessMC = chessMC;
     }
 
-    public boolean startGame() {
-        chessMC.startGame();
-        String startGameInput = InputHandler.isStartGame();
-        if (startGameInput.equals(END_INPUT)) {
-            return false;
+    public void startGame() {
+        String startGameInput = chessMC.startGame();
+        if (startGameInput.equals(GameStatusManager.END_INPUT)) {
+            chessMC.completeGame();
+            return;
         }
 
-        return true;
+        initChessBoard();
+
     }
+
 
 }

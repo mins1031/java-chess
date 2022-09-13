@@ -15,6 +15,7 @@
 - 살아있는 말과 죽은 말 관리
 - 왕이 죽으면 게임의 승패를 내리기
 
+startGame -> initChessBoard -> progressGame -> endGame
 
 -> 게임을 시작하려면 start, 끝내려면 end를 입력해주세요.
 -> (체스판 보여준뒤) 체스말을 움직이려면 move 명령과 좌표를 입력해주세요 ex ) move b2(origin point) b3(move point)

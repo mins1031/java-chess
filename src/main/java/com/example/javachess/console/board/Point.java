@@ -12,5 +12,4 @@ public class Point {
         this.standPiece = standPiece;
     }
 
-
 }

@@ -8,6 +8,4 @@ public class BoardBasicInfo {
     public static final String WIDTH_MIN_POINT = "a";
     public static final String WIDTH_MAX_POINT = "h";
 
-
-
 }

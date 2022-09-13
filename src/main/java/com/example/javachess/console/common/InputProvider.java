@@ -2,7 +2,7 @@ package com.example.javachess.console.common;
 
 import java.util.Scanner;
 
-public class InputHandler {
+public class InputProvider {
 
     private static final Scanner scanner = new Scanner(System.in);
 
