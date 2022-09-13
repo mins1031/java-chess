@@ -4,4 +4,5 @@ public class GameStatusManager {
 
     public final static String START_INPUT = "start";
     public final static String END_INPUT = "end";
+
 }
