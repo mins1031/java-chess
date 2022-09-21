@@ -9,7 +9,7 @@ public class ChessBoard {
 
     private Map<Point, Piece> chessBoard = new TreeMap<>();
 
-    private void initChessBoard() {
+    public void initChessBoard() {
         for (Integer heightPoint : BoardBasicInfo.HEIGHT_POINTS) {
             for (String widthPoint : BoardBasicInfo.WIDTH_POINTS) {
                 if (heightPoint.equals(BoardBasicInfo.))

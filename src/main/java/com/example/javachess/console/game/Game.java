@@ -1,12 +1,11 @@
 package com.example.javachess.console.game;
 
+import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.common.GameStatusManager;
-import com.example.javachess.console.common.InputProvider;
 
 public class Game {
 
     private MC chessMC;
-
 
     public Game(MC chessMC) {
         this.chessMC = chessMC;
@@ -19,7 +18,8 @@ public class Game {
             return;
         }
 
-        initChessBoard();
+        ChessBoard chessBoard = new ChessBoard();
+        chessBoard.initChessBoard();
 
     }
 
