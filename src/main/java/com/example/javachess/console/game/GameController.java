@@ -3,11 +3,11 @@ package com.example.javachess.console.game;
 import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.common.GameStatusManager;
 
-public class Game {
+public class GameController {
 
     private MC chessMC;
 
-    public Game(MC chessMC) {
+    public GameController(MC chessMC) {
         this.chessMC = chessMC;
     }
 
