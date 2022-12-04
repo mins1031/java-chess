@@ -1,8 +1,9 @@
 package com.example.javachess.console.Position;
 
-import com.example.javachess.console.piece.Piece;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor
@@ -20,4 +21,16 @@ public class Position {
         return new Position(file, rank);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return file == position.file && rank == position.rank;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(file, rank);
+    }
 }

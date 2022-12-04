@@ -21,13 +21,22 @@ public class ChessBoard {
 
     public void initChessBoard() {
         makeBoard();
-        
+        for (Position whitePiecePosition : BoardBasicInfo.INIT_WHITE_PIECE_POSITIONS) {
+            chessBoard.get(whitePiecePosition);
+            chessBoard.put(whitePiecePosition, )
+        }
+
     }
 
     private void makeBoard() {
         for (File file : File.values()) {
             for (Rank rank : Rank.values()) {
-                chessBoard.put(Position.of(file, rank), null);
+                Position position = Position.of(file, rank);
+                if (BoardBasicInfo.INIT_WHITE_PIECE_POSITIONS.contains(position)) {
+                    chessBoard.put(position, null);
+                }
+
+                chessBoard.put(position, null);
             }
         }
     }
