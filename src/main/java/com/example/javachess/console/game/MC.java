@@ -14,11 +14,6 @@ public class MC {
         return InputProvider.isStartGame();
     }
 
-    public String () {
-        System.out.println(GAME_START_MESSAGE);
-        return InputProvider.isStartGame();
-    }
-
     public void completeGame() {
         System.out.println(GAME_COMPLETE_MESSAGE);
     }
