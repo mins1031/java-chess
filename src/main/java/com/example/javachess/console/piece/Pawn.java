@@ -1,16 +1,19 @@
 package com.example.javachess.console.piece;
 
+import com.example.javachess.console.Position.Position;
+import com.example.javachess.console.Team.Team;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class Pawn extends Piece {
-    private boolean isLive;
 
-    public Pawn(Team ownTeam, boolean isLive) {
-        super(ownTeam);
-        this.isLive = isLive;
+    public Pawn(Team ownTeam, Position position) {
+        super(ownTeam, position);
     }
 
+    @Override
+    boolean isInitPosition(Position position) {
+        return false;
+    }
 
 }

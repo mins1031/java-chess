@@ -1,16 +1,14 @@
 package com.example.javachess.console.piece;
 
-import com.example.javachess.console.Position.File;
 import com.example.javachess.console.Position.Position;
-import com.example.javachess.console.Position.Rank;
+import com.example.javachess.console.Team.Team;
 import lombok.Getter;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @Getter
 public enum PieceList {
-    PAWN(() -> ),
+    PAWN(),
     ROOK(),
     BISHOP(),
     NIGHT(),
@@ -18,5 +16,5 @@ public enum PieceList {
     KING()
     ;
 
-    private BiFunction<File, Rank, Piece> function;
+    private BiFunction<Position, Team, Piece> function;
 }
