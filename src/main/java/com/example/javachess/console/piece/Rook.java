@@ -9,6 +9,10 @@ public class Rook extends Piece {
         super(ownTeam, position);
     }
 
+    public static Rook of(Team ownTeam, Position position){
+        return new Rook(ownTeam, position);
+    }
+
     @Override
     boolean isInitPosition(Position position) {
         return false;

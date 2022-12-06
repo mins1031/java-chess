@@ -9,6 +9,10 @@ public class Queen extends Piece {
         super(ownTeam, position);
     }
 
+    public static Queen of(Team ownTeam, Position position) {
+        return new Queen(ownTeam, position);
+    }
+
     @Override
     boolean isInitPosition(Position position) {
         return false;

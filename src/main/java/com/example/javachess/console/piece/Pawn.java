@@ -11,6 +11,10 @@ public class Pawn extends Piece {
         super(ownTeam, position);
     }
 
+    public static Pawn of(Team ownTeam, Position position) {
+        return new Pawn(ownTeam, position);
+    }
+
     @Override
     boolean isInitPosition(Position position) {
         return false;

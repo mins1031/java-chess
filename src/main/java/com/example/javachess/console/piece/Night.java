@@ -9,6 +9,10 @@ public class Night extends Piece {
         super(ownTeam, position);
     }
 
+    public static Night of(Team ownTeam, Position position) {
+        return new Night(ownTeam, position);
+    }
+
     @Override
     boolean isInitPosition(Position position) {
         return false;

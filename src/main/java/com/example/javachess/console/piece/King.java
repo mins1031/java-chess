@@ -9,6 +9,10 @@ public class King extends Piece {
         super(ownTeam, position);
     }
 
+    public static King of(Team ownTeam, Position position){
+        return new King(ownTeam, position);
+    }
+
     @Override
     boolean isInitPosition(Position position) {
         return false;

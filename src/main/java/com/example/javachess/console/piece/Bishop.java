@@ -9,6 +9,10 @@ public class Bishop extends Piece {
         super(ownTeam, position);
     }
 
+    public static Bishop of(Team ownTeam, Position position) {
+        return new Bishop(ownTeam, position);
+    }
+
     @Override
     boolean isInitPosition(Position position) {
         return false;

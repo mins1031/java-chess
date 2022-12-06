@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,20 +25,26 @@ class ChessBoardTest {
     @Test
     void 체스판_초기화() {
         //given
-        Map<Position, Piece> intiBeforeBoard = chessBoard.getChessBoard();
-        int initBeforeBoardSize = intiBeforeBoard.size();
+        List<Position> initBeforePositions = chessBoard.getPositions();
+        List<Piece> initBeforePieces = chessBoard.getPieces();
+
+        int initBeforePieceCount = initBeforePositions.size();
+        int initBeforePositionCount = initBeforePieces.size();
 
         //when
         chessBoard.initChessBoard();
 
         //then
-        Map<Position, Piece> initAfterBoard = this.chessBoard.getChessBoard();
-        int initAfterBoardSize = initAfterBoard.size();
+        List<Piece> initAfterPiece = this.chessBoard.getPieces();
+        List<Position> initAfterPosition = this.chessBoard.getPositions();
 
-        Assertions.assertThat(initBeforeBoardSize).isEqualTo(0);
-        Assertions.assertThat(initAfterBoardSize).isEqualTo(64);
+        int initAfterPieceCount = initAfterPiece.size();
+        int initAfterPositionCount = initAfterPosition.size();
 
-        Assertions.assertThat(initAfterBoardSize).isEqualTo(64);
+        Assertions.assertThat(initBeforePositionCount).isEqualTo(0);
+        Assertions.assertThat(initAfterPositionCount).isEqualTo(64);
+        Assertions.assertThat(initBeforePieceCount).isEqualTo(0);
+        Assertions.assertThat(initAfterPieceCount).isEqualTo(32);
 
     }
 }
