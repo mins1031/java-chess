@@ -6,21 +6,20 @@ import java.util.List;
 
 public class PieceInitFacade {
 
-    public static void initWhiteTeamPiece(Team team, List<Piece> pieces) {
-        List<Rook> blackRooks = team.createInitRooks();
-        List<Bishop> blackBishops = team.createInitBishops();
-        List<Night> blackNights = team.createInitNights();
-        Queen blackQueen = team.createInitQueen();
-        King blackKing = team.createInitKing();
-        List<Pawn> initPawns = team.createInitPawns();
+    public static void initTeamPieces(Team team, List<Piece> pieces) {
+        List<Rook> initTeamRooks = team.createInitRooks();
+        List<Bishop> initTeamBishops = team.createInitBishops();
+        List<Night> initTeamNights = team.createInitNights();
+        Queen initTeamQueen = team.createInitQueen();
+        King initTeamKing = team.createInitKing();
+        List<Pawn> initTeamPawns = team.createInitPawns();
 
-        pieces.addAll(blackRooks);
-        pieces.addAll(blackBishops);
-        pieces.addAll(blackNights);
-        pieces.add(blackQueen);
-        pieces.add(blackKing);
-        pieces.addAll(blackNights);
-
+        pieces.addAll(initTeamRooks);
+        pieces.addAll(initTeamBishops);
+        pieces.addAll(initTeamNights);
+        pieces.add(initTeamQueen);
+        pieces.add(initTeamKing);
+        pieces.addAll(initTeamPawns);
     }
 
 }

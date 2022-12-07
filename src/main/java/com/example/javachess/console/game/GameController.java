@@ -1,5 +1,6 @@
 package com.example.javachess.console.game;
 
+import com.example.javachess.console.board.BoardBasicInfo;
 import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.common.GameStatusManager;
 
@@ -19,7 +20,8 @@ public class GameController {
         }
 
         ChessBoard chessBoard = new ChessBoard();
-        chessBoard.initChessBoard();
+        chessBoard.initChessBoard(BoardBasicInfo.BASIC_TEAMS_IN_CHESS);
+
 
     }
 

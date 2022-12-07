@@ -14,26 +14,48 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
 public class ChessBoard {
-    //일급컬렉션에 대해 알아보고 map 보드를 전체 get 할지, 특정위치의 상황 get and 모든 위치의 상태 toString 처럼 get 하는 두개의 get 메서드 만들지?
-
     private List<Position> positions = new ArrayList<>();
     private List<Piece> pieces = new ArrayList<>();
-    private List<Team> teams = Arrays.asList(new BlackTeam(), new WhiteTeam());
+    private static final String EMPTY_POSITION = ".";
 
-    public void initChessBoard() {
+    public void initChessBoard(List<Team> teams) {
         makeBoardPosition();
-        teams.forEach(team -> PieceInitFacade.initWhiteTeamPiece(team, pieces));
+        teams.forEach(team -> PieceInitFacade.initTeamPieces(team, pieces));
+    }
+
+    public void printCurrentChessBoard() {
+        for (Position position : positions) {
+            String outputPosition = findPieceByPosition(position).map(piece -> piece.getPieceName(piece.getOwnTeam())).orElseGet(() -> EMPTY_POSITION);
+            System.out.print(outputPosition);
+            isFileH(position);
+        }
     }
 
     private void makeBoardPosition() {
-        for (File file : File.values()) {
-            for (Rank rank : Rank.values()) {
+        for (Rank rank : Rank.values()) {
+            for (File file : File.values()) {
                 positions.add(Position.of(file, rank));
             }
+        }
+    }
+
+    private Optional<Piece> findPieceByPosition(Position position) {
+        return pieces.stream()
+                .filter(piece -> piece.getPosition().equals(position))
+                .findFirst();
+    }
+
+    private void isFileH(Position position) {
+        if (position.getFile() == File.H) {
+            System.out.println();
         }
     }
 

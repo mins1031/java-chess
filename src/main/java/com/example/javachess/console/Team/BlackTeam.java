@@ -24,6 +24,8 @@ public class BlackTeam extends Team {
     private final Position kingInitPosition;
     private final Rank pawnInitRank;
 
+    private TeamType teamType;
+
     public BlackTeam() {
         this.rookInitPosition = Arrays.asList(Position.of(File.A, Rank.EIGHT), Position.of(File.H, Rank.EIGHT));
         this.bishopInitPosition = Arrays.asList(Position.of(File.B, Rank.EIGHT), Position.of(File.G, Rank.EIGHT));
@@ -31,6 +33,7 @@ public class BlackTeam extends Team {
         this.queenInitPosition = Position.of(File.D, Rank.EIGHT);
         this.kingInitPosition = Position.of(File.E, Rank.EIGHT);
         this.pawnInitRank = Rank.SEVEN;
+        this.teamType = TeamType.BLACK;
     }
 
     @Override
@@ -70,6 +73,11 @@ public class BlackTeam extends Team {
                 .map(file -> Position.of(file, this.pawnInitRank))
                 .map(position -> Pawn.of(this, position))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public TeamType getTeamType() {
+        return this.teamType;
     }
 
 }

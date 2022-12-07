@@ -17,4 +17,6 @@ public abstract class Team {
     public abstract Queen createInitQueen();
     public abstract King createInitKing();
     public abstract List<Pawn> createInitPawns();
+
+    public abstract TeamType getTeamType();
 }

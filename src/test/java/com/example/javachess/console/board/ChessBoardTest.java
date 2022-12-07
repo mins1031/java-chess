@@ -32,7 +32,7 @@ class ChessBoardTest {
         int initBeforePositionCount = initBeforePieces.size();
 
         //when
-        chessBoard.initChessBoard();
+        chessBoard.initChessBoard(BoardBasicInfo.BASIC_TEAMS_IN_CHESS);
 
         //then
         List<Piece> initAfterPiece = this.chessBoard.getPieces();
@@ -45,6 +45,17 @@ class ChessBoardTest {
         Assertions.assertThat(initAfterPositionCount).isEqualTo(64);
         Assertions.assertThat(initBeforePieceCount).isEqualTo(0);
         Assertions.assertThat(initAfterPieceCount).isEqualTo(32);
+    }
 
+    @DisplayName("초기화 상태에서 체스판 출력 확인")
+    @Test
+    public void 체스판_초기화후_콘솔출력() {
+        System.out.println("-------------before-init-------------");
+        chessBoard.printCurrentChessBoard();
+
+        chessBoard.initChessBoard(BoardBasicInfo.BASIC_TEAMS_IN_CHESS);
+
+        System.out.println("-------------after-init-------------");
+        chessBoard.printCurrentChessBoard();
     }
 }
