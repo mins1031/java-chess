@@ -99,7 +99,8 @@ startGame -> initChessBoard -> progressGame -> endGame
     - 체스 말의 이동 규칙을 찾아보고 체스 말이 이동할 수 있도록 구현한다.
     - move source위치 target위치을 실행해 이동한다.
     - 체스판의 위치 값은 가로 위치는 왼쪽부터 a ~ h이고, 세로는 아래부터 위로 1 ~ 8로 구현한다.
-    ‘‘‘
+
+‘‘‘
     프로그램 실행 결과
     > 체스 게임을 시작합니다.
     > 게임 시작 : start
@@ -124,7 +125,7 @@ startGame -> initChessBoard -> progressGame -> endGame
     .p......
     p.pppppp
     rnbqkbnr
-    ‘‘‘
+‘‘‘
  * 기본 이동 정리
 폰
 
