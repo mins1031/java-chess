@@ -29,6 +29,7 @@ public class ChessBoard {
     public void initChessBoard(List<Team> teams) {
         makeBoardPosition();
         teams.forEach(team -> PieceInitFacade.initTeamPieces(team, pieces));
+        printCurrentChessBoard();
     }
 
     public void printCurrentChessBoard() {

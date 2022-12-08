@@ -1,5 +1,6 @@
 package com.example.javachess.console.game;
 
+import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.common.ScannerUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ class GameControllerTest {
     void 게임시작_입력값_핸들링_start() {
         //given
         String input = "start";
-        GameController gameController = new GameController(new MC());
+        GameController gameController = new GameController(new ChessBoard());
         ScannerUtil.setInputWithScannerForTest(input);
 
         //when

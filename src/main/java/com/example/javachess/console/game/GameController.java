@@ -6,24 +6,27 @@ import com.example.javachess.console.common.GameStatusManager;
 
 public class GameController {
 
-    private MC chessMC;
+    private ChessBoard chessBoard;
 
-    public GameController(MC chessMC) {
-        this.chessMC = chessMC;
+    public GameController(ChessBoard chessBoard) {
+        this.chessBoard = chessBoard;
     }
 
     public void startGame() {
-        String startGameInput = chessMC.startGame();
+        String startGameInput = MC.startGame();
         if (startGameInput.equals(GameStatusManager.END_INPUT)) {
-            chessMC.completeGame();
+            MC.completeGame();
             return;
         }
 
-        ChessBoard chessBoard = new ChessBoard();
         chessBoard.initChessBoard(BoardBasicInfo.BASIC_TEAMS_IN_CHESS);
-
-
+        onGoingChessGame(chessBoard);
     }
 
-
+    public void onGoingChessGame(ChessBoard chessBoard) {
+        while (true) {
+            String command = MC.requestCommand();
+            // king이 잡혔는지 아닌지 확인해줄게 필요.
+        }
+    }
 }

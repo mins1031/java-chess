@@ -10,4 +10,7 @@ public class InputProvider {
         return scanner.next();
     }
 
+    public static String inputCommand() {
+        return scanner.next();
+    }
 }

@@ -151,6 +151,7 @@ startGame -> initChessBoard -> progressGame -> endGame
     p.pppppp
     rnbqkbnr
 ‘‘‘
+
  - 기본 이동 정리
     - 폰
         - 앞으로 한 칸 이동
@@ -163,7 +164,6 @@ startGame -> initChessBoard -> progressGame -> endGame
     - 나이트(Minor)
         - L자 이동(수평/수직 2칸 - 반대로 한칸)
         - 피스를 뛰어넘을 수 있는 유일한 피스
-
     - 비숍(Minor)
         - 대각선 직선 이동
     - 퀸(Major)
@@ -173,7 +173,7 @@ startGame -> initChessBoard -> progressGame -> endGame
         - 단 상대방 킹의 이동 범위 내로 이동할 수 없음
         - 킹은 상대편의 킹과 퀸을 잡을 수 없음
         - 킹과 룩이 모두 이동하지 않은 상태에서, 킹과 룩 사이에 피스가 없는 경우, 그리고 움직였을 때 킹이 잡히지 않을 경우 캐슬링 가능 ->?? 뭔지 모르겠따 일단 보류
-        - 퀸사이드 캐슬링 : 왼쪽으로 두 칸 이동, 왼쪽 룩이 킹의 오른쪽에 위치 ->? 
+        - 퀸사이드 캐슬링 : 왼쪽으로 두 칸 이동, 왼쪽 룩이 킹의 오른쪽에 위치 ->? 보류
         - 킹사이드 캐슬링 : 오른쪽으로 두 칸 이동, 오른쪽 룩이 킹의 왼쪽에 위치 -> 보류
 
     - 기타 
