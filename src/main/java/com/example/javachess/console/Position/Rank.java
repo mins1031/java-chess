@@ -2,6 +2,8 @@ package com.example.javachess.console.Position;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum Rank {
     EIGHT(8),
@@ -18,5 +20,11 @@ public enum Rank {
 
     Rank(int RankNumber) {
         this.rankNumber = RankNumber;
+    }
+
+    public static Rank convertNameToRank(int rankNumber) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getRankNumber() == rankNumber)
+                .findFirst().orElse(null);
     }
 }

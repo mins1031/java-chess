@@ -2,6 +2,8 @@ package com.example.javachess.console.Position;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum File {
     A("a", 1),
@@ -20,5 +22,11 @@ public enum File {
     File(String fileName, int fileNumber) {
         this.fileName = fileName;
         this.fileNumber = fileNumber;
+    }
+
+    public static File convertNameToFile(String fileName) {
+        return Arrays.stream(File.values())
+                .filter(file -> file.getFileName().equals(fileName))
+                .findFirst().orElse(null);
     }
 }

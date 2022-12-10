@@ -27,9 +27,13 @@ public class GameController {
     public void onGoingChessGame(ChessBoard chessBoard) {
         while (true) {
             String command = MC.requestCommand();
-            new InputParser();
-            chessBoard.
-            // king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
+            try {
+                new InputParser();
+//            chessBoard.
+                // king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
