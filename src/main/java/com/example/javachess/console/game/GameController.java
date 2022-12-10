@@ -2,6 +2,7 @@ package com.example.javachess.console.game;
 
 import com.example.javachess.console.board.BoardBasicInfo;
 import com.example.javachess.console.board.ChessBoard;
+import com.example.javachess.console.common.InputParser;
 import com.example.javachess.console.common.GameStatusManager;
 
 public class GameController {
@@ -26,7 +27,9 @@ public class GameController {
     public void onGoingChessGame(ChessBoard chessBoard) {
         while (true) {
             String command = MC.requestCommand();
-            // king이 잡혔는지 아닌지 확인해줄게 필요.
+            new InputParser();
+            chessBoard.
+            // king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
         }
     }
 }
