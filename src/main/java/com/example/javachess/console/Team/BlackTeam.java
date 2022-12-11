@@ -79,5 +79,4 @@ public class BlackTeam extends Team {
     public TeamType getTeamType() {
         return this.teamType;
     }
-
 }

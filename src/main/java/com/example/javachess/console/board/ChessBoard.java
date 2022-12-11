@@ -34,9 +34,11 @@ public class ChessBoard {
         }
     }
 
-//    public void findPieceByPosition(Position position) {
-//
-//    }
+    public Optional<Piece> findPieceByPosition(Position position) {
+        return pieces.stream()
+                .filter(piece -> piece.getPosition().equals(position))
+                .findFirst();
+    }
 
     private void makeBoardPosition() {
         for (Rank rank : Rank.values()) {
@@ -45,11 +47,4 @@ public class ChessBoard {
             }
         }
     }
-
-    private Optional<Piece> findPieceByPosition(Position position) {
-        return pieces.stream()
-                .filter(piece -> piece.getPosition().equals(position))
-                .findFirst();
-    }
-
 }

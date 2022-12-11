@@ -2,6 +2,7 @@ package com.example.javachess.console.piece;
 
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
+import com.example.javachess.console.Team.TeamType;
 import lombok.Getter;
 
 import java.util.Objects;
@@ -22,6 +23,10 @@ public abstract class Piece {
 
     public boolean isNight() {
         return false;
+    }
+
+    public boolean compareTeamType(TeamType teamType) {
+        return this.ownTeam.getTeamType().equals(teamType);
     }
 
     @Override
