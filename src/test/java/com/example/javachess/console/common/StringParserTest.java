@@ -5,13 +5,10 @@ import com.example.javachess.console.Position.Rank;
 import com.example.javachess.console.command.InputCommand;
 import com.example.javachess.console.command.MoveCommand;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class InputParserTest {
+class StringParserTest {
 
     @DisplayName("사용자의 명령을 입력받아 파싱한다.")
     @Test
@@ -27,7 +24,7 @@ class InputParserTest {
         Rank expectAfterRank = Rank.THREE;
 
         //when
-        InputCommand inputCommand = InputParser.commandParser(command);
+        InputCommand inputCommand = StringParser.commandParser(command);
 
         //then
         Assertions.assertThat(inputCommand.getMoveCommand()).isEqualTo(expectMoveCommand);

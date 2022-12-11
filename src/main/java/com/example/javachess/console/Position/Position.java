@@ -21,6 +21,12 @@ public class Position {
         return new Position(file, rank);
     }
 
+    public void isFileH() {
+        if (this.file == File.H) {
+            System.out.println();
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

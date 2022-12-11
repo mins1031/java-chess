@@ -30,9 +30,13 @@ public class ChessBoard {
         for (Position position : positions) {
             String outputPosition = findPieceByPosition(position).map(piece -> piece.getPieceName(piece.getOwnTeam())).orElseGet(() -> EMPTY_POSITION);
             System.out.print(outputPosition);
-            isFileH(position);
+            position.isFileH();
         }
     }
+
+//    public void findPieceByPosition(Position position) {
+//
+//    }
 
     private void makeBoardPosition() {
         for (Rank rank : Rank.values()) {
@@ -46,12 +50,6 @@ public class ChessBoard {
         return pieces.stream()
                 .filter(piece -> piece.getPosition().equals(position))
                 .findFirst();
-    }
-
-    private void isFileH(Position position) {
-        if (position.getFile() == File.H) {
-            System.out.println();
-        }
     }
 
 }

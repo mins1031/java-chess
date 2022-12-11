@@ -9,7 +9,7 @@ import com.example.javachess.console.common.exception.NoMatchMovePatternExceptio
 
 import java.util.Arrays;
 
-public class InputParser {
+public class StringParser {
     private static final int MOVE_COMMAND_INDEX = 0;
     private static final int BEFORE_POSITION_COMMAND_INDEX = 1;
     private static final int AFTER_POSITION_COMMAND_INDEX = 2;
