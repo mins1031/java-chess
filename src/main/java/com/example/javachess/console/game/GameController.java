@@ -7,6 +7,7 @@ import com.example.javachess.console.command.InputCommand;
 import com.example.javachess.console.common.StringParser;
 import com.example.javachess.console.common.GameStatusManager;
 import com.example.javachess.console.common.exception.AlreadyExistPieceInTargetPositionException;
+import com.example.javachess.console.common.exception.WrongCommandException;
 import com.example.javachess.console.piece.Piece;
 
 import java.util.Optional;
@@ -43,9 +44,8 @@ public class GameController {
                 InputCommand inputCommand = StringParser.commandParser(command);
                 Optional<Piece> beforePiecePosition = chessBoard.findPieceByPosition(inputCommand.getBeforePosition());
                 Optional<Piece> afterPiecePosition = chessBoard.findPieceByPosition(inputCommand.getAfterPosition());
-                if (afterPiecePosition.isPresent() && afterPiecePosition.get().compareTeamType(presentTurn)) {
-                    throw new AlreadyExistPieceInTargetPositionException();
-                }
+                validPiecePositions(beforePiecePosition, afterPiecePosition);
+
 
 
                 //TODO king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
@@ -55,6 +55,22 @@ public class GameController {
 
             changePresentTurn();
         }
+    }
+
+    private void validPiecePositions(Optional<Piece> beforePiecePosition, Optional<Piece> afterPiecePosition) {
+        //이전 좌표에 현재턴인 팀의 피스가 있어야함.
+        if (!beforePiecePosition.isPresent() || !isPresentTurnTeamPieceInPosition(beforePiecePosition)) {
+            throw new WrongCommandException();
+        }
+
+        //목표 좌표에 현재턴인 팀의 피스가 있으면 안됨.
+        if (isPresentTurnTeamPieceInPosition(afterPiecePosition)) {
+            throw new AlreadyExistPieceInTargetPositionException();
+        }
+    }
+
+    private boolean isPresentTurnTeamPieceInPosition(Optional<Piece> piecePosition) {
+        return piecePosition.get().compareTeamType(presentTurn);
     }
 
     private void changePresentTurn() {
