@@ -27,6 +27,14 @@ public class Position {
         }
     }
 
+    public int getFileNumber() {
+        return this.file.getFileNumber();
+    }
+
+    public int getRankNumber() {
+        return this.rank.getRankNumber();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
