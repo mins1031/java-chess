@@ -9,7 +9,7 @@ public class King extends Piece {
     private static final String BLACK_KING_NAME = "K";
 
     public King(Team ownTeam, Position position) {
-        super(ownTeam, position);
+        super(ownTeam, position, PieceName.KING);
     }
 
     public static King of(Team ownTeam, Position position){

@@ -9,7 +9,7 @@ public class Rook extends Piece {
     private static final String BLACK_ROOK_NAME = "R";
 
     public Rook(Team ownTeam, Position position) {
-        super(ownTeam, position);
+        super(ownTeam, position, PieceName.ROOK);
     }
 
     public static Rook of(Team ownTeam, Position position){

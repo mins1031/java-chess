@@ -18,9 +18,10 @@ class MovePatternFactoryTest {
         Position afterPosition = Position.of(File.E, Rank.SIX);
 
         //when
-        MovePatternFactory.validationMovePattern();
+        MovePattern movePattern = MovePatternFactory.validationMovePattern(beforePosition, afterPosition);
 
         //then
+
 
     }
 }

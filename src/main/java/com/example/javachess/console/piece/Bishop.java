@@ -9,7 +9,7 @@ public class Bishop extends Piece {
     private static final String BLACK_BISHOP_NAME = "B";
 
     public Bishop(Team ownTeam, Position position) {
-        super(ownTeam, position);
+        super(ownTeam, position, PieceName.BISHOP);
     }
 
     public static Bishop of(Team ownTeam, Position position) {

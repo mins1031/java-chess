@@ -9,7 +9,7 @@ public class Queen extends Piece {
     private static final String BLACK_QUEEN_NAME = "Q";
 
     public Queen(Team ownTeam, Position position) {
-        super(ownTeam, position);
+        super(ownTeam, position, PieceName.QUEEN);
     }
 
     public static Queen of(Team ownTeam, Position position) {

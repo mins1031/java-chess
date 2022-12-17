@@ -1,11 +1,11 @@
 package com.example.javachess.console.move;
 
 import com.example.javachess.console.Position.Position;
-import com.example.javachess.console.piece.Piece;
+import com.example.javachess.console.common.exception.NotMoveTargetPositionException;
 
 public class MovePatternFactory {
 
-    public static MovePattern validationMovePattern(Piece piece, Position beforePosition, Position afterPosition) {
+    public static MovePattern validationMovePattern(Position beforePosition, Position afterPosition) {
         if (isStraightPattern(beforePosition, afterPosition)) {
             //직진 패턴일때
             return new StraightMovePattern();
@@ -21,9 +21,12 @@ public class MovePatternFactory {
             return new NightMovePattern();
         }
 
+//        if (isStraightPattern(beforePosition, afterPosition) || isCrossPattern(beforePosition, afterPosition)) {
+//            //나이트 패턴일때
+//            return new KingMovePattern();
+//        }
 
-
-
+        throw new NotMoveTargetPositionException();
     }
 
     private static boolean isNightPattern(Position beforePosition, Position afterPosition) {

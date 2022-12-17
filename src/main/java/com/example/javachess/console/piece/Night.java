@@ -9,7 +9,7 @@ public class Night extends Piece {
     private static final String BLACK_NIGHT_NAME = "N";
 
     public Night(Team ownTeam, Position position) {
-        super(ownTeam, position);
+        super(ownTeam, position, PieceName.NIGHT);
     }
 
     public static Night of(Team ownTeam, Position position) {

@@ -11,7 +11,7 @@ public class Pawn extends Piece {
     private static final String BLACK_PAWN_NAME = "P";
 
     public Pawn(Team ownTeam, Position position) {
-        super(ownTeam, position);
+        super(ownTeam, position, PieceName.PAWN);
     }
 
     public static Pawn of(Team ownTeam, Position position) {

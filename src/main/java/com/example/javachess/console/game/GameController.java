@@ -46,7 +46,7 @@ public class GameController {
                 Optional<Piece> beforePiece = chessBoard.findPieceByPosition(inputCommand.getBeforePosition());
                 Optional<Piece> afterPiece = chessBoard.findPieceByPosition(inputCommand.getAfterPosition());
                 validPiecePositions(beforePiece, afterPiece);
-                MovePatternFactory.validationMovePattern(beforePiece.get(), inputCommand.getBeforePosition(), inputCommand.getAfterPosition());
+                MovePatternFactory.validationMovePattern(inputCommand.getBeforePosition(), inputCommand.getAfterPosition());
 
 
                 //TODO king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출

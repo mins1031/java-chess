@@ -11,10 +11,12 @@ import java.util.Objects;
 public abstract class Piece {
     private Team ownTeam;
     private Position position;
+    private PieceName pieceName;
 
-    public Piece(Team ownTeam, Position position) {
+    public Piece(Team ownTeam, Position position, PieceName pieceName) {
         this.ownTeam = ownTeam;
         this.position = position;
+        this.pieceName = pieceName;
     }
 
     abstract boolean isInitPosition(Position position);
