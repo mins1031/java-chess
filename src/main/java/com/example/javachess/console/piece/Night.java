@@ -3,6 +3,7 @@ package com.example.javachess.console.piece;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
+import com.example.javachess.console.move.MovePattern;
 
 public class Night extends Piece {
     private static final String WHITE_NIGHT_NAME = "n";
@@ -27,10 +28,15 @@ public class Night extends Piece {
     }
 
     @Override
-    public String getPieceName(Team team) {
+    public String getTeamName(Team team) {
         if (team.getTeamType() == TeamType.WHITE) {
             return WHITE_NIGHT_NAME;
         }
         return BLACK_NIGHT_NAME;
+    }
+
+    @Override
+    public boolean verifyMovePattern(MovePattern movePattern) {
+        return false;
     }
 }

@@ -28,7 +28,7 @@ public class ChessBoard {
 
     public void printCurrentChessBoard() {
         for (Position position : positions) {
-            String outputPosition = findPieceByPosition(position).map(piece -> piece.getPieceName(piece.getOwnTeam())).orElseGet(() -> EMPTY_POSITION);
+            String outputPosition = findPieceByPosition(position).map(piece -> piece.getTeamName(piece.getOwnTeam())).orElseGet(() -> EMPTY_POSITION);
             System.out.print(outputPosition);
             position.isFileH();
         }

@@ -3,6 +3,7 @@ package com.example.javachess.console.piece;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
+import com.example.javachess.console.move.MovePattern;
 import lombok.Getter;
 
 @Getter
@@ -24,11 +25,16 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public String getPieceName(Team team) {
+    public String getTeamName(Team team) {
         if (team.getTeamType() == TeamType.WHITE) {
             return WHITE_PAWN_NAME;
         }
         return BLACK_PAWN_NAME;
+    }
+
+    @Override
+    public boolean verifyMovePattern(MovePattern movePattern) {
+        return false;
     }
 
 

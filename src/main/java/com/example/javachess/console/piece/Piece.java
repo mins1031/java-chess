@@ -3,6 +3,7 @@ package com.example.javachess.console.piece;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
+import com.example.javachess.console.move.MovePattern;
 import lombok.Getter;
 
 import java.util.Objects;
@@ -21,7 +22,9 @@ public abstract class Piece {
 
     abstract boolean isInitPosition(Position position);
 
-    public abstract String getPieceName(Team team);
+    public abstract String getTeamName(Team team);
+
+    public abstract boolean verifyMovePattern(MovePattern movePattern);
 
     public boolean isNight() {
         return false;

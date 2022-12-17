@@ -1,6 +1,9 @@
 package com.example.javachess.console.board;
 
 import com.example.javachess.console.Position.Position;
+import com.example.javachess.console.move.CrossMovePattern;
+import com.example.javachess.console.move.MovePattern;
+import com.example.javachess.console.move.StraightMovePattern;
 import com.example.javachess.console.piece.Piece;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,5 +57,22 @@ class ChessBoardTest {
 
         System.out.println("-------------after-init-------------");
         chessBoard.printCurrentChessBoard();
+    }
+
+    @DisplayName("캐스팅 테스트")
+    @Test
+    public void 캐스팅테스트() {
+        //given
+        MovePattern movePattern = new StraightMovePattern();
+
+        //when
+        boolean rightSuperResult = (movePattern instanceof MovePattern);
+        boolean rightSubResult = (movePattern instanceof StraightMovePattern);
+        boolean wrongSubResult = (movePattern instanceof CrossMovePattern);
+
+        //then
+        Assertions.assertThat(rightSuperResult).isTrue();
+        Assertions.assertThat(rightSubResult).isTrue();
+        Assertions.assertThat(wrongSubResult).isFalse();
     }
 }

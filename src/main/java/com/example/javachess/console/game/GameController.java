@@ -7,7 +7,9 @@ import com.example.javachess.console.command.InputCommand;
 import com.example.javachess.console.common.StringParser;
 import com.example.javachess.console.common.GameStatusManager;
 import com.example.javachess.console.common.exception.AlreadyExistPieceInTargetPositionException;
+import com.example.javachess.console.common.exception.NotMoveTargetPositionException;
 import com.example.javachess.console.common.exception.WrongCommandException;
+import com.example.javachess.console.move.MovePattern;
 import com.example.javachess.console.move.MovePatternFactory;
 import com.example.javachess.console.piece.Piece;
 
@@ -46,7 +48,7 @@ public class GameController {
                 Optional<Piece> beforePiece = chessBoard.findPieceByPosition(inputCommand.getBeforePosition());
                 Optional<Piece> afterPiece = chessBoard.findPieceByPosition(inputCommand.getAfterPosition());
                 validPiecePositions(beforePiece, afterPiece);
-                MovePatternFactory.validationMovePattern(inputCommand.getBeforePosition(), inputCommand.getAfterPosition());
+                movePiece(inputCommand, beforePiece, afterPiece);
 
 
                 //TODO king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
@@ -56,6 +58,16 @@ public class GameController {
 
             changePresentTurn();
         }
+    }
+
+    private void movePiece(InputCommand inputCommand, Optional<Piece> beforePiece, Optional<Piece> afterPiece) {
+        MovePattern movePattern = MovePatternFactory.extractMovePattern(inputCommand.getBeforePosition(), inputCommand.getAfterPosition());
+        Piece pieceAppointedMovePosition = beforePiece.get();
+        if (!pieceAppointedMovePosition.verifyMovePattern(movePattern)) {
+            throw new NotMoveTargetPositionException();
+        }
+
+
     }
 
     private void validPiecePositions(Optional<Piece> beforePiecePosition, Optional<Piece> afterPiecePosition) {
