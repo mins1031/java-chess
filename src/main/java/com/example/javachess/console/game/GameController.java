@@ -76,7 +76,7 @@ public class GameController {
 
         }
 
-        chessBoard.updatePiecePosition(pieceOnPresentPosition.getPosition(), pieceOnPresentPosition.getPosition());
+        chessBoard.updatePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
     }
 
     private void validPieceInCommand(Optional<Piece> presentPiecePosition, Optional<Piece> targetPiecePosition) {

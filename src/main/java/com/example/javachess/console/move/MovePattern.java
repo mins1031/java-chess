@@ -1,8 +1,11 @@
 package com.example.javachess.console.move;
 
 import com.example.javachess.console.Position.Position;
+import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.piece.Piece;
+import lombok.Getter;
 
+@Getter
 public abstract class MovePattern {
     private Position presentPosition;
     private Position targetPosition;
@@ -14,5 +17,5 @@ public abstract class MovePattern {
 
     public abstract boolean isMatchToPiece(Piece piece);
 
-    public abstract boolean checkOurPieceInMovePath();
+    public abstract boolean checkOurPieceInMovePath(ChessBoard chessBoard);
 }

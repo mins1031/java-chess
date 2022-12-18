@@ -1,6 +1,7 @@
 package com.example.javachess.console.move;
 
 import com.example.javachess.console.Position.Position;
+import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.piece.Piece;
 
 public class KingMovePattern extends MovePattern {
@@ -16,7 +17,7 @@ public class KingMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean checkOurPieceInMovePath() {
+    public boolean checkOurPieceInMovePath(ChessBoard chessBoard) {
         return false;
     }
 }
