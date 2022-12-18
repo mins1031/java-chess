@@ -5,20 +5,17 @@ import com.example.javachess.console.common.exception.NotMoveTargetPositionExcep
 
 public class MovePatternFactory {
 
-    public static MovePattern extractMovePattern(Position beforePosition, Position afterPosition) {
-        if (isNightPattern(beforePosition, afterPosition)) {
-            //나이트 패턴일때
-            return new NightMovePattern();
+    public static MovePattern extractMovePattern(Position presentPosition, Position targetPosition) {
+        if (isNightPattern(presentPosition, targetPosition)) {
+            return new NightMovePattern(presentPosition, targetPosition);
         }
 
-        if (isStraightPattern(beforePosition, afterPosition)) {
-            //직진 패턴일때
-            return new StraightMovePattern();
+        if (isStraightPattern(presentPosition, targetPosition)) {
+            return new StraightMovePattern(presentPosition, targetPosition);
         }
 
-        if (isCrossPattern(beforePosition, afterPosition)) {
-            //크로스 패턴일때
-            return new CrossMovePattern();
+        if (isCrossPattern(presentPosition, targetPosition)) {
+            return new CrossMovePattern(presentPosition, targetPosition);
         }
 
         throw new NotMoveTargetPositionException();

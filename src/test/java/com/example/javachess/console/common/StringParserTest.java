@@ -24,13 +24,13 @@ class StringParserTest {
         Rank expectAfterRank = Rank.THREE;
 
         //when
-        InputCommand inputCommand = StringParser.commandParser(command);
+        InputCommand inputCommand = StringParser.inputCommandParser(command);
 
         //then
         Assertions.assertThat(inputCommand.getMoveCommand()).isEqualTo(expectMoveCommand);
-        Assertions.assertThat(inputCommand.getBeforePosition().getFile()).isEqualTo(expectBeforeFile);
-        Assertions.assertThat(inputCommand.getBeforePosition().getRank()).isEqualTo(expectBeforeRank);
-        Assertions.assertThat(inputCommand.getAfterPosition().getFile()).isEqualTo(expectAfterFile);
-        Assertions.assertThat(inputCommand.getAfterPosition().getRank()).isEqualTo(expectAfterRank);
+        Assertions.assertThat(inputCommand.getPresentPosition().getFile()).isEqualTo(expectBeforeFile);
+        Assertions.assertThat(inputCommand.getPresentPosition().getRank()).isEqualTo(expectBeforeRank);
+        Assertions.assertThat(inputCommand.getTargetPosition().getFile()).isEqualTo(expectAfterFile);
+        Assertions.assertThat(inputCommand.getTargetPosition().getRank()).isEqualTo(expectAfterRank);
     }
 }

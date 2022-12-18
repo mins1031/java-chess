@@ -2,7 +2,6 @@ package com.example.javachess.console;
 
 import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.game.GameController;
-import com.example.javachess.console.game.MC;
 
 public class GameMain {
 

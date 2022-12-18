@@ -44,12 +44,11 @@ public class GameController {
         while (true) {
             String command = MC.requestCommand();
             try {
-                InputCommand inputCommand = StringParser.commandParser(command);
-                Optional<Piece> beforePiece = chessBoard.findPieceByPosition(inputCommand.getBeforePosition());
-                Optional<Piece> afterPiece = chessBoard.findPieceByPosition(inputCommand.getAfterPosition());
-                validPiecePositions(beforePiece, afterPiece);
-                movePiece(inputCommand, beforePiece, afterPiece);
+                InputCommand inputCommand = StringParser.inputCommandParser(command);
+                Optional<Piece> beforePiece = chessBoard.findPieceByPosition(inputCommand.getPresentPosition());
+                Optional<Piece> afterPiece = chessBoard.findPieceByPosition(inputCommand.getTargetPosition());
 
+                movePiece(inputCommand);
 
                 //TODO king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
             } catch (RuntimeException e) {
@@ -60,29 +59,39 @@ public class GameController {
         }
     }
 
-    private void movePiece(InputCommand inputCommand, Optional<Piece> beforePiece, Optional<Piece> afterPiece) {
-        MovePattern movePattern = MovePatternFactory.extractMovePattern(inputCommand.getBeforePosition(), inputCommand.getAfterPosition());
-        Piece pieceAppointedMovePosition = beforePiece.get();
-        if (!pieceAppointedMovePosition.verifyMovePattern(movePattern)) {
+    private void movePiece(InputCommand inputCommand) {
+        // 명령을 받는다 -> 이동가능한지 파악한다. -> [해당 피스가 해당 위치로 이동이 가능한지, 목표위치에 우리팀 피스가 있는지 없는지, 이동길목에 피스가 있는지, 목표위치에 상대팀 피스가 있는지 (피스 잡음)] -> 이동
+        Optional<Piece> pieceOnPresentPosition = chessBoard.findPieceByPosition(inputCommand.getPresentPosition());
+        Optional<Piece> pieceOnTargetPosition = chessBoard.findPieceByPosition(inputCommand.getTargetPosition());
+        validPieceInCommand(pieceOnPresentPosition, pieceOnTargetPosition);
+
+        MovePattern movePattern = MovePatternFactory.extractMovePattern(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
+
+        if (!pieceOnPresentPosition.get().verifyMovePattern(movePattern)) {
             throw new NotMoveTargetPositionException();
         }
 
+        if (!pieceOnTargetPosition.isPresent() && !isPresentTurnTeamPiece(pieceOnTargetPosition)) {
+            //해당 포지션 피스 제거
 
+        }
+
+        chessBoard.updatePiecePosition(pieceOnPresentPosition.getPosition(), pieceOnPresentPosition.getPosition());
     }
 
-    private void validPiecePositions(Optional<Piece> beforePiecePosition, Optional<Piece> afterPiecePosition) {
-        //이전 좌표에 현재턴인 팀의 피스가 있어야함.
-        if (!beforePiecePosition.isPresent() || !isPresentTurnTeamPieceInPosition(beforePiecePosition)) {
+    private void validPieceInCommand(Optional<Piece> presentPiecePosition, Optional<Piece> targetPiecePosition) {
+        //현재 좌표에 현재턴인 팀의 피스가 있어야함.
+        if (!presentPiecePosition.isPresent() || !isPresentTurnTeamPiece(presentPiecePosition)) {
             throw new WrongCommandException();
         }
 
         //목표 좌표에 현재턴인 팀의 피스가 있으면 안됨.
-        if (isPresentTurnTeamPieceInPosition(afterPiecePosition)) {
+        if (!targetPiecePosition.isPresent() && isPresentTurnTeamPiece(targetPiecePosition)) {
             throw new AlreadyExistPieceInTargetPositionException();
         }
     }
 
-    private boolean isPresentTurnTeamPieceInPosition(Optional<Piece> piecePosition) {
+    private boolean isPresentTurnTeamPiece(Optional<Piece> piecePosition) {
         return piecePosition.get().compareTeamType(presentTurn);
     }
 

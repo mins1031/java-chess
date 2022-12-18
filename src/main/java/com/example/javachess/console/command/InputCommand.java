@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InputCommand {
     private MoveCommand moveCommand;
-    private Position beforePosition;
-    private Position afterPosition;
+    private Position presentPosition;
+    private Position targetPosition;
 
 
-    public InputCommand(MoveCommand moveCommand, Position beforePosition, Position afterPosition) {
+    public InputCommand(MoveCommand moveCommand, Position presentPosition, Position targetPosition) {
         this.moveCommand = moveCommand;
-        this.beforePosition = beforePosition;
-        this.afterPosition = afterPosition;
+        this.presentPosition = presentPosition;
+        this.targetPosition = targetPosition;
     }
 }

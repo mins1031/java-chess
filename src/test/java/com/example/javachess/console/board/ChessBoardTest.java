@@ -1,6 +1,8 @@
 package com.example.javachess.console.board;
 
+import com.example.javachess.console.Position.File;
 import com.example.javachess.console.Position.Position;
+import com.example.javachess.console.Position.Rank;
 import com.example.javachess.console.move.CrossMovePattern;
 import com.example.javachess.console.move.MovePattern;
 import com.example.javachess.console.move.StraightMovePattern;
@@ -51,19 +53,19 @@ class ChessBoardTest {
     @Test
     public void 체스판_초기화후_콘솔출력() {
         System.out.println("-------------before-init-------------");
-        chessBoard.printCurrentChessBoard();
+        chessBoard.printPresentBoardStatus();
 
         chessBoard.initChessBoard(BoardBasicInfo.BASIC_TEAMS_IN_CHESS);
 
         System.out.println("-------------after-init-------------");
-        chessBoard.printCurrentChessBoard();
+        chessBoard.printPresentBoardStatus();
     }
 
     @DisplayName("캐스팅 테스트")
     @Test
     public void 캐스팅테스트() {
         //given
-        MovePattern movePattern = new StraightMovePattern();
+        MovePattern movePattern = new StraightMovePattern(Position.of(File.F, Rank.ONE), Position.of(File.F, Rank.THREE));
 
         //when
         boolean rightSuperResult = (movePattern instanceof MovePattern);

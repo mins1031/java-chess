@@ -1,11 +1,21 @@
 package com.example.javachess.console.move;
 
+import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.piece.Piece;
 
-public class CrossMovePattern implements MovePattern {
+public class CrossMovePattern extends MovePattern {
+
+    public CrossMovePattern(Position presentPosition, Position targetPosition) {
+        super(presentPosition, targetPosition);
+    }
 
     @Override
     public boolean isMatchToPiece(Piece piece) {
         return true;
+    }
+
+    @Override
+    public boolean checkOurPieceInMovePath() {
+        return false;
     }
 }

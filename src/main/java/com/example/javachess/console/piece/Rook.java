@@ -23,7 +23,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public String getTeamName(Team team) {
+    public String getPrintPieceNameByTeam(Team team) {
         if (team.getTeamType() == TeamType.WHITE) {
             return WHITE_ROOK_NAME;
         }

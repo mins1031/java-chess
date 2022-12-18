@@ -21,5 +21,4 @@ public class PieceInitFacade {
         pieces.add(initTeamKing);
         pieces.addAll(initTeamPawns);
     }
-
 }

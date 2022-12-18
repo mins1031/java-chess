@@ -14,7 +14,7 @@ public class StringParser {
     private static final int BEFORE_POSITION_COMMAND_INDEX = 1;
     private static final int AFTER_POSITION_COMMAND_INDEX = 2;
 
-    public static InputCommand commandParser(String command) {
+    public static InputCommand inputCommandParser(String command) {
         String[] degradedCommand = command.split(" ");
         return new InputCommand(
                 extractMoveCommand(degradedCommand[MOVE_COMMAND_INDEX]),
