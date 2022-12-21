@@ -21,22 +21,29 @@ public class MovePatternFactory {
         throw new NotMoveTargetPositionException();
     }
 
-    private static boolean isStraightPattern(Position beforePosition, Position afterPosition) {
-        boolean isWidthStraight = beforePosition.getFileNumber() == afterPosition.getFileNumber()
-                && beforePosition.getRankNumber() != afterPosition.getRankNumber();
-
-        boolean isHeightStraight = beforePosition.getFileNumber() != afterPosition.getFileNumber()
-                && beforePosition.getRankNumber() == afterPosition.getRankNumber();
+    public static boolean isStraightPattern(Position beforePosition, Position afterPosition) {
+        boolean isWidthStraight = checkWidthStraight(beforePosition, afterPosition);
+        boolean isHeightStraight = checkHeightStraight(beforePosition, afterPosition);
 
         return (isWidthStraight || isHeightStraight);
     }
 
-    private static boolean isCrossPattern(Position beforePosition, Position afterPosition) {
+    public static boolean checkHeightStraight(Position beforePosition, Position afterPosition) {
+        return beforePosition.getFileNumber() != afterPosition.getFileNumber()
+                && beforePosition.getRankNumber() == afterPosition.getRankNumber();
+    }
+
+    public static boolean checkWidthStraight(Position beforePosition, Position afterPosition) {
+        return beforePosition.getFileNumber() == afterPosition.getFileNumber()
+                && beforePosition.getRankNumber() != afterPosition.getRankNumber();
+    }
+
+    public static boolean isCrossPattern(Position beforePosition, Position afterPosition) {
         return beforePosition.getFileNumber() != afterPosition.getFileNumber()
                 && beforePosition.getRankNumber() != afterPosition.getRankNumber();
     }
 
-    private static boolean isNightPattern(Position beforePosition, Position afterPosition) {
+    public static boolean isNightPattern(Position beforePosition, Position afterPosition) {
         int fileSubAbsValue = Math.abs(beforePosition.getFileNumber() - afterPosition.getFileNumber());
         int rankSubAbsValue = Math.abs(beforePosition.getRankNumber() - afterPosition.getRankNumber());
 

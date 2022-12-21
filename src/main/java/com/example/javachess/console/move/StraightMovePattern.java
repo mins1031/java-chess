@@ -18,12 +18,12 @@ public class StraightMovePattern extends MovePattern {
 
     @Override
     public boolean checkOurPieceInMovePath(ChessBoard chessBoard) {
-        File standardFile = this.getPresentPosition().getFile();
-        int presentRankNumber = this.getPresentPosition().getRankNumber();
-        int targetRankNumber = this.getTargetPosition().getRankNumber();
-        int movePositionCount = presentRankNumber - targetRankNumber;
-
-
+        if (MovePatternFactory.checkHeightStraight(this.getPresentPosition(), this.getTargetPosition())) {
+            File standardFile = this.getPresentPosition().getFile();
+            int presentRankNumber = this.getPresentPosition().getRankNumber();
+            int targetRankNumber = this.getTargetPosition().getRankNumber();
+            int movePositionCount = presentRankNumber - targetRankNumber;
+        }
 
         return false;
     }
