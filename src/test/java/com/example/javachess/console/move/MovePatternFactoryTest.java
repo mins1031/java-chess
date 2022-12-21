@@ -9,12 +9,26 @@ import org.junit.jupiter.api.Test;
 
 class MovePatternFactoryTest {
 
-    @DisplayName("현재 위치, 이동할 위치 두개의 포지션으로 StraightMovePattern을 구해낼 수 있다.")
+    @DisplayName("현재 위치, 이동할 위치 두개의 포지션으로 위,아래로 직진하는 StraightMovePattern을 구해낼 수 있다.")
     @Test
-    public void StraightMovePattern_추출() {
+    public void StraightHeightMovePattern_추출() {
         //given
         Position beforePosition = Position.of(File.E, Rank.FIVE);
         Position afterPosition = Position.of(File.E, Rank.SIX);
+
+        //when
+        MovePattern movePattern = MovePatternFactory.extractMovePattern(beforePosition, afterPosition);
+
+        //then
+        Assertions.assertThat(movePattern instanceof StraightMovePattern).isTrue();
+    }
+
+    @DisplayName("현재 위치, 이동할 위치 두개의 포지션으로 좌우로 직진하는 StraightMovePattern을 구해낼 수 있다.")
+    @Test
+    public void StraightWidthMovePattern_추출() {
+        //given
+        Position beforePosition = Position.of(File.E, Rank.FIVE);
+        Position afterPosition = Position.of(File.H, Rank.FIVE);
 
         //when
         MovePattern movePattern = MovePatternFactory.extractMovePattern(beforePosition, afterPosition);

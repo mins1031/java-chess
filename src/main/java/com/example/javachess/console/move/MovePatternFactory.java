@@ -22,8 +22,13 @@ public class MovePatternFactory {
     }
 
     private static boolean isStraightPattern(Position beforePosition, Position afterPosition) {
-        return beforePosition.getFileNumber() == afterPosition.getFileNumber()
+        boolean isWidthStraight = beforePosition.getFileNumber() == afterPosition.getFileNumber()
                 && beforePosition.getRankNumber() != afterPosition.getRankNumber();
+
+        boolean isHeightStraight = beforePosition.getFileNumber() != afterPosition.getFileNumber()
+                && beforePosition.getRankNumber() == afterPosition.getRankNumber();
+
+        return (isWidthStraight || isHeightStraight);
     }
 
     private static boolean isCrossPattern(Position beforePosition, Position afterPosition) {

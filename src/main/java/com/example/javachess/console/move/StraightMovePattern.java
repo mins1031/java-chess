@@ -25,6 +25,6 @@ public class StraightMovePattern extends MovePattern {
 
 
 
-        return ;
+        return false;
     }
 }
