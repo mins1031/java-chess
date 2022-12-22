@@ -8,6 +8,6 @@ public enum Direction {
     RIGHT_FRONT,
     RIGHT_BACK,
     LEFT_FRONT,
-    LEFT_BACK,
+    LEFT_BACK
     ;
 }

@@ -2,13 +2,16 @@ package com.example.javachess.console.move.pattern;
 
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.board.ChessBoard;
+import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.piece.Piece;
 import lombok.Getter;
 
 @Getter
 public abstract class MovePattern {
-    private Position presentPosition;
-    private Position targetPosition;
+    protected Position presentPosition;
+    protected Position targetPosition;
+    private Direction direction;
+    private int moveCount;
 
     public MovePattern(Position presentPosition, Position targetPosition) {
         this.presentPosition = presentPosition;
@@ -18,4 +21,14 @@ public abstract class MovePattern {
     public abstract boolean isMatchToPiece(Piece piece);
 
     public abstract boolean checkOurPieceInMovePath(ChessBoard chessBoard);
+
+    public abstract void calculateMoveDirectionAndCount();
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public void setMoveCount(int moveCount) {
+        this.moveCount = moveCount;
+    }
 }
