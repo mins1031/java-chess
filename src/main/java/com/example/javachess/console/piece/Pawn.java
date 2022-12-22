@@ -3,13 +3,10 @@ package com.example.javachess.console.piece;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
-import com.example.javachess.console.move.CrossMovePattern;
-import com.example.javachess.console.move.MovePattern;
-import com.example.javachess.console.move.StraightMovePattern;
+import com.example.javachess.console.move.pattern.CrossMovePattern;
+import com.example.javachess.console.move.pattern.MovePattern;
+import com.example.javachess.console.move.pattern.StraightMovePattern;
 import lombok.Getter;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Getter
 public class Pawn extends Piece {

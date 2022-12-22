@@ -1,4 +1,4 @@
-package com.example.javachess.console.move;
+package com.example.javachess.console.move.pattern;
 
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.board.ChessBoard;

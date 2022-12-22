@@ -9,8 +9,8 @@ import com.example.javachess.console.common.GameStatusManager;
 import com.example.javachess.console.common.exception.AlreadyExistPieceInTargetPositionException;
 import com.example.javachess.console.common.exception.NotMoveTargetPositionException;
 import com.example.javachess.console.common.exception.WrongCommandException;
-import com.example.javachess.console.move.MovePattern;
-import com.example.javachess.console.move.MovePatternFactory;
+import com.example.javachess.console.move.pattern.MovePattern;
+import com.example.javachess.console.move.pattern.MovePatternFactory;
 import com.example.javachess.console.piece.Piece;
 
 import java.util.Optional;

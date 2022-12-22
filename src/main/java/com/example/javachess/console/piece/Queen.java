@@ -3,7 +3,7 @@ package com.example.javachess.console.piece;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
-import com.example.javachess.console.move.MovePattern;
+import com.example.javachess.console.move.pattern.MovePattern;
 
 public class Queen extends Piece {
     private static final String WHITE_QUEEN_NAME = "q";
