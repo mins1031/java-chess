@@ -45,9 +45,6 @@ public class GameController {
             String command = MC.requestCommand();
             try {
                 InputCommand inputCommand = StringParser.inputCommandParser(command);
-                Optional<Piece> beforePiece = chessBoard.findPieceByPosition(inputCommand.getPresentPosition());
-                Optional<Piece> afterPiece = chessBoard.findPieceByPosition(inputCommand.getTargetPosition());
-
                 movePiece(inputCommand);
 
                 //TODO king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출

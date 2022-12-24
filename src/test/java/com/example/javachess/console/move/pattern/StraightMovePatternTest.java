@@ -28,8 +28,8 @@ class StraightMovePatternTest {
         //when
         boolean isObstruction = straightMovePattern.checkObstructionOnMovePath(chessBoard);
 
-        //then
-        Assertions.assertThat(isObstruction).isFalse();
+        //
+        Assertions.assertThat(isObstruction).isTrue();
     }
 
 }

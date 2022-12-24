@@ -43,21 +43,48 @@ public class StraightMovePattern extends MovePattern {
     public boolean checkObstructionOnMovePath(ChessBoard chessBoard) {
         boolean isObstruction = true;
         if (MovePatternFactory.checkHeightStraight(this.presentPosition, this.targetPosition)) {
-            int movePositionCount = this.presentPosition.getRankNumber() - this.targetPosition.getRankNumber();
-            if (this.direction.equals(Direction.BACK) && movePositionCount < 0) {
-                isObstruction = validObstructionOnBackRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), movePositionCount);
+            int moveSubCount = this.presentPosition.getRankNumber() - this.targetPosition.getRankNumber();
+            if (this.direction.equals(Direction.BACK) && moveSubCount < 0) {
+                int moveSubCountExceptTargetPosition = moveSubCount + 1;
+                isObstruction = validObstructionOnBackRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
             }
 
-            if (this.direction.equals(Direction.FRONT) && movePositionCount > 0) {
-                isObstruction = validObstructionOnBackRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), movePositionCount);
+            if (this.direction.equals(Direction.FRONT) && moveSubCount > 0) {
+                int moveSubCountExceptTargetPosition = moveSubCount - 1;
+                isObstruction = validObstructionOnFrontRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
+            }
+        }
+
+        if (MovePatternFactory.checkWidthStraight(this.presentPosition, this.targetPosition)) {
+            int moveSubCount = this.presentPosition.getFileNumber() - this.targetPosition.getFileNumber();
+            if (this.direction.equals(Direction.LEFT) && moveSubCount > 0) {
+                int moveSubCountExceptTargetPosition = moveSubCount + 1;
+                isObstruction = validObstructionOnBackRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
+            }
+
+            if (this.direction.equals(Direction.RIGHT) && moveSubCount < 0) {
+                int moveSubCountExceptTargetPosition = moveSubCount - 1;
+                isObstruction = validObstructionOnFrontRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
             }
         }
 
         return isObstruction;
     }
 
+    private boolean validObstructionOnFrontRoad(ChessBoard chessBoard, File standardFile, int standardRank, int movePositionCount) {
+        for (int index = movePositionCount - 1; index > 0; index--) {
+            int subRankNum = standardRank - index;
+            Optional<Piece> pieceByPosition = chessBoard.findPieceByPosition(Position.of(standardFile, Rank.convertNameToRank(subRankNum)));
+            if (!pieceByPosition.isPresent()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private boolean validObstructionOnBackRoad(ChessBoard chessBoard, File standardFile, int standardRank, int movePositionCount) {
-        for (int index = movePositionCount; index < 0; index++) {
+        for (int index = movePositionCount + 1; index < 0; index++) {
             int subRankNum = standardRank - index;
             Optional<Piece> pieceByPosition = chessBoard.findPieceByPosition(Position.of(standardFile, Rank.convertNameToRank(subRankNum)));
             if (!pieceByPosition.isPresent()) {
