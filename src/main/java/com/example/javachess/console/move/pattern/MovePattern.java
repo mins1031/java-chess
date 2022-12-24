@@ -10,8 +10,8 @@ import lombok.Getter;
 public abstract class MovePattern {
     protected Position presentPosition;
     protected Position targetPosition;
-    private Direction direction;
-    private int moveCount;
+    protected Direction direction;
+    protected int moveCount;
 
     public MovePattern(Position presentPosition, Position targetPosition) {
         this.presentPosition = presentPosition;
@@ -20,7 +20,7 @@ public abstract class MovePattern {
 
     public abstract boolean isMatchToPiece(Piece piece);
 
-    public abstract boolean checkOurPieceInMovePath(ChessBoard chessBoard);
+    public abstract boolean checkObstructionOnMovePath(ChessBoard chessBoard);
 
     public abstract void calculateMoveDirectionAndCount();
 
