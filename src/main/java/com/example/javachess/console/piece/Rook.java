@@ -34,4 +34,9 @@ public class Rook extends Piece {
     public boolean verifyMovePattern(MovePattern movePattern) {
         return false;
     }
+
+    @Override
+    public void move(MovePattern movePattern) {
+
+    }
 }

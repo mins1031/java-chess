@@ -21,12 +21,13 @@ class StraightMovePatternTest {
         //given
         ChessBoard chessBoard = new ChessBoard();
         chessBoard.initChessBoard(Arrays.asList(new WhiteTeam(), new BlackTeam()));
+        Position presentPosition = Position.of(File.A, Rank.SEVEN);
 
-        StraightMovePattern straightMovePattern = new StraightMovePattern(Position.of(File.A, Rank.SEVEN), Position.of(File.C, Rank.SEVEN));
+        StraightMovePattern straightMovePattern = new StraightMovePattern(presentPosition, Position.of(File.C, Rank.SEVEN));
         straightMovePattern.calculateMoveDirectionAndCount();
 
         //when
-        boolean isObstruction = straightMovePattern.checkObstructionOnMovePath(chessBoard);
+        boolean isObstruction = straightMovePattern.checkObstructionOnMovePath(chessBoard, chessBoard.findPieceByPosition(presentPosition).get());
 
         //
         Assertions.assertThat(isObstruction).isTrue();

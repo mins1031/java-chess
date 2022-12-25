@@ -20,7 +20,7 @@ public abstract class MovePattern {
 
     public abstract boolean isMatchToPiece(Piece piece);
 
-    public abstract boolean checkObstructionOnMovePath(ChessBoard chessBoard);
+    public abstract boolean checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece);
 
     public abstract void calculateMoveDirectionAndCount();
 

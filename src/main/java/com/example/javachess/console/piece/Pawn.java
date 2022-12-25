@@ -48,4 +48,9 @@ public class Pawn extends Piece {
 
         return true;
     }
+
+    @Override
+    public void move(MovePattern movePattern) {
+        this.p
+    }
 }

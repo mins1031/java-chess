@@ -16,7 +16,7 @@ public class CrossMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean checkObstructionOnMovePath(ChessBoard chessBoard) {
+    public boolean checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
         return false;
     }
 

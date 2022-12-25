@@ -39,4 +39,9 @@ public class Night extends Piece {
     public boolean verifyMovePattern(MovePattern movePattern) {
         return false;
     }
+
+    @Override
+    public void move(MovePattern movePattern) {
+
+    }
 }

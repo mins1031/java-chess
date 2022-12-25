@@ -28,6 +28,11 @@ public class Bishop extends Piece {
     }
 
     @Override
+    public void move(MovePattern movePattern) {
+
+    }
+
+    @Override
     public String getPrintPieceNameByTeam(Team team) {
         if (team.getTeamType() == TeamType.WHITE) {
             return WHITE_BISHOP_NAME;

@@ -70,7 +70,8 @@ public class GameController {
 
         if (!pieceOnTargetPosition.isPresent() && !isPresentTurnTeamPiece(pieceOnTargetPosition)) {
             //해당 포지션 피스 제거
-
+            movePattern.calculateMoveDirectionAndCount();
+            movePattern.checkObstructionOnMovePath(this.chessBoard, pieceOnPresentPosition.get());
         }
 
         chessBoard.updatePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());

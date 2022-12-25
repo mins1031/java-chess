@@ -40,8 +40,10 @@ public class StraightMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean checkObstructionOnMovePath(ChessBoard chessBoard) {
+    public boolean checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
         boolean isObstruction = true;
+        piece.move(this.direction, this.moveCount);
+
         if (MovePatternFactory.checkHeightStraight(this.presentPosition, this.targetPosition)) {
             int moveSubCount = this.presentPosition.getRankNumber() - this.targetPosition.getRankNumber();
             if (this.direction.equals(Direction.BACK) && moveSubCount < 0) {

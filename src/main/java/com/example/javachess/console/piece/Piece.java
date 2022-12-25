@@ -10,9 +10,9 @@ import java.util.Objects;
 
 @Getter
 public abstract class Piece {
-    private Team ownTeam;
-    private Position position;
-    private PieceName pieceName;
+    protected Team ownTeam;
+    protected Position position;
+    protected PieceName pieceName;
 
     public Piece(Team ownTeam, Position position, PieceName pieceName) {
         this.ownTeam = ownTeam;
@@ -26,6 +26,8 @@ public abstract class Piece {
 
     //verifyMovePattern 의 경우 패턴 뿐만 아니라 포지션 데이터도 받아야할것같다. 이걸 여기서 파리미터로 받느냐 아니면 패턴객체에 들고있냐는 고민을 해봐야 할듯.
     public abstract boolean verifyMovePattern(MovePattern movePattern);
+
+    public abstract void move(MovePattern movePattern);
 
     public boolean isNight() {
         return false;

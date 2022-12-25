@@ -19,7 +19,7 @@ public class NightMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean checkObstructionOnMovePath(ChessBoard chessBoard) {
+    public boolean checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
         return false;
     }
 
