@@ -29,4 +29,10 @@ public enum File {
                 .filter(file -> file.getFileName().equals(fileName))
                 .findFirst().orElse(null);
     }
+
+    public static File convertNumToFile(int fileNum) {
+        return Arrays.stream(File.values())
+                .filter(file -> file.getFileNumber() == fileNum)
+                .findFirst().orElse(null);
+    }
 }

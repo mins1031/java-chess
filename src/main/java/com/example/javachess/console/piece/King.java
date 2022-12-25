@@ -3,6 +3,7 @@ package com.example.javachess.console.piece;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
+import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.move.pattern.MovePattern;
 
 public class King extends Piece {
@@ -36,7 +37,7 @@ public class King extends Piece {
     }
 
     @Override
-    public void move(MovePattern movePattern) {
+    public void move(Direction direction, int moveCount) {
 
     }
 }

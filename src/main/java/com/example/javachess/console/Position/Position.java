@@ -35,6 +35,11 @@ public class Position {
         return this.rank.getRankNumber();
     }
 
+    public void movePosition(int fileNum, int rankNum) {
+        this.file = File.convertNumToFile(fileNum);
+        this.rank = Rank.convertNameToRank(fileNum);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
