@@ -25,7 +25,7 @@ public class Night extends Piece {
 
     @Override
     public boolean isNotNight() {
-        return true;
+        return false;
     }
 
     @Override

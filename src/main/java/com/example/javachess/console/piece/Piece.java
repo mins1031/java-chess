@@ -31,7 +31,7 @@ public abstract class Piece {
     public abstract void move(Direction direction, int moveCount);
 
     public boolean isNotNight() {
-        return false;
+        return true;
     }
 
     public boolean compareTeamType(TeamType teamType) {
