@@ -1,5 +1,8 @@
 package com.example.javachess.console.move.direction;
 
+import lombok.Getter;
+
+@Getter
 public enum Direction {
     RIGHT(1, 0),
     LEFT(-1, 0),

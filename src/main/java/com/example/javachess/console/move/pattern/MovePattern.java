@@ -20,9 +20,9 @@ public abstract class MovePattern {
 
     public abstract boolean isMatchToPiece(Piece piece);
 
-    public abstract boolean checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece);
+    public abstract void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece);
 
-    public abstract void calculateMoveDirectionAndCount();
+    public abstract void calculateMoveDirectionAndCount(Piece piece);
 
     public void setDirection(Direction direction) {
         this.direction = direction;

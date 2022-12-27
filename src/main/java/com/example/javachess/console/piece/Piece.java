@@ -30,7 +30,7 @@ public abstract class Piece {
 
     public abstract void move(Direction direction, int moveCount);
 
-    public boolean isNight() {
+    public boolean isNotNight() {
         return false;
     }
 

@@ -3,7 +3,11 @@ package com.example.javachess.console.move.pattern;
 import com.example.javachess.console.Position.File;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Position.Rank;
+import com.example.javachess.console.Team.BlackTeam;
+import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.board.ChessBoard;
+import com.example.javachess.console.common.exception.NoMatchMovePatternException;
+import com.example.javachess.console.common.exception.NotMoveTargetPositionException;
 import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.piece.Piece;
 
@@ -21,84 +25,46 @@ public class StraightMovePattern extends MovePattern {
     }
 
     @Override
-    public void calculateMoveDirectionAndCount() {
-        if (changeOnlyRank() && increaseRank()) {
+    public void calculateMoveDirectionAndCount(Piece piece) {
+        if (changeOnlyRank() && increaseRank(piece.getOwnTeam())) {
             initDirectionAndCount(presentPosition.getRankNumber(), targetPosition.getRankNumber(), Direction.FRONT);
+            return;
         }
 
-        if (changeOnlyRank() && decreaseRank()) {
+        if (changeOnlyRank() && decreaseRank(piece.getOwnTeam())) {
             initDirectionAndCount(presentPosition.getRankNumber(), targetPosition.getRankNumber(), Direction.BACK);
+            return;
         }
 
-        if (changeOnlyFile() && increaseFile()) {
+        if (changeOnlyFile() && increaseFile(piece.getOwnTeam())) {
             initDirectionAndCount(presentPosition.getFileNumber(), targetPosition.getFileNumber(), Direction.RIGHT);
+            return;
         }
 
-        if (changeOnlyFile() && decreaseFile()) {
+        if (changeOnlyFile() && decreaseFile(piece.getOwnTeam())) {
             initDirectionAndCount(presentPosition.getFileNumber(), targetPosition.getFileNumber(), Direction.LEFT);
+            return;
         }
+
+        throw new NoMatchMovePatternException();
     }
 
     @Override
-    public boolean checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
-        boolean isObstruction = true;
-        piece.move(this.direction, this.moveCount);
-
-        if (MovePatternFactory.checkHeightStraight(this.presentPosition, this.targetPosition)) {
-            int moveSubCount = this.presentPosition.getRankNumber() - this.targetPosition.getRankNumber();
-            if (this.direction.equals(Direction.BACK) && moveSubCount < 0) {
-                int moveSubCountExceptTargetPosition = moveSubCount + 1;
-                isObstruction = validObstructionOnBackRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
-            }
-
-            if (this.direction.equals(Direction.FRONT) && moveSubCount > 0) {
-                int moveSubCountExceptTargetPosition = moveSubCount - 1;
-                isObstruction = validObstructionOnFrontRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
+    public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
+        Direction direction = this.direction;
+        Position tempPosition = Position.of(this.presentPosition.getFile(), this.targetPosition.getRank());
+        int moveCountExceptTargetPosition = this.moveCount - 1;
+        for (int index = 0; moveCountExceptTargetPosition > index; index++) {
+            tempPosition.movePosition(direction.getXPoint(), direction.getYPoint());
+            Optional<Piece> pieceExpectedEmpty = chessBoard.findPieceByPosition(tempPosition).filter(Piece::isNotNight);
+            if (pieceExpectedEmpty.isPresent()) {
+                throw new NotMoveTargetPositionException();
             }
         }
-
-        if (MovePatternFactory.checkWidthStraight(this.presentPosition, this.targetPosition)) {
-            int moveSubCount = this.presentPosition.getFileNumber() - this.targetPosition.getFileNumber();
-            if (this.direction.equals(Direction.LEFT) && moveSubCount > 0) {
-                int moveSubCountExceptTargetPosition = moveSubCount + 1;
-                isObstruction = validObstructionOnBackRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
-            }
-
-            if (this.direction.equals(Direction.RIGHT) && moveSubCount < 0) {
-                int moveSubCountExceptTargetPosition = moveSubCount - 1;
-                isObstruction = validObstructionOnFrontRoad(chessBoard, this.presentPosition.getFile(), this.presentPosition.getRankNumber(), moveSubCountExceptTargetPosition);
-            }
-        }
-
-        return isObstruction;
-    }
-
-    private boolean validObstructionOnFrontRoad(ChessBoard chessBoard, File standardFile, int standardRank, int movePositionCount) {
-        for (int index = movePositionCount - 1; index > 0; index--) {
-            int subRankNum = standardRank - index;
-            Optional<Piece> pieceByPosition = chessBoard.findPieceByPosition(Position.of(standardFile, Rank.convertNameToRank(subRankNum)));
-            if (!pieceByPosition.isPresent()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private boolean validObstructionOnBackRoad(ChessBoard chessBoard, File standardFile, int standardRank, int movePositionCount) {
-        for (int index = movePositionCount + 1; index < 0; index++) {
-            int subRankNum = standardRank - index;
-            Optional<Piece> pieceByPosition = chessBoard.findPieceByPosition(Position.of(standardFile, Rank.convertNameToRank(subRankNum)));
-            if (!pieceByPosition.isPresent()) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     private void initDirectionAndCount(int presentNumber, int targetNumber, Direction direction) {
-        int moveCount = presentNumber - targetNumber;
+        int moveCount = Math.abs(presentNumber - targetNumber);
         setDirection(direction);
         setMoveCount(moveCount);
     }
@@ -113,19 +79,19 @@ public class StraightMovePattern extends MovePattern {
                 && (presentPosition.getRankNumber() == targetPosition.getRankNumber());
     }
 
-    private boolean increaseRank() {
+    private boolean increaseRank(Team team) {
         return presentPosition.getRankNumber() < targetPosition.getRankNumber();
     }
 
-    private boolean decreaseRank() {
+    private boolean decreaseRank(Team team) {
         return presentPosition.getRankNumber() > targetPosition.getRankNumber();
     }
 
-    private boolean increaseFile() {
+    private boolean increaseFile(Team team) {
         return presentPosition.getFileNumber() < targetPosition.getFileNumber();
     }
 
-    private boolean decreaseFile() {
+    private boolean decreaseFile(Team team) {
         return presentPosition.getFileNumber() > targetPosition.getFileNumber();
     }
 }

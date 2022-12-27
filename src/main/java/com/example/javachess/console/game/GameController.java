@@ -60,7 +60,7 @@ public class GameController {
         // 명령을 받는다 -> 이동가능한지 파악한다. -> [해당 피스가 해당 위치로 이동이 가능한지, 목표위치에 우리팀 피스가 있는지 없는지, 이동길목에 피스가 있는지, 목표위치에 상대팀 피스가 있는지 (피스 잡음)] -> 이동
         Optional<Piece> pieceOnPresentPosition = chessBoard.findPieceByPosition(inputCommand.getPresentPosition());
         Optional<Piece> pieceOnTargetPosition = chessBoard.findPieceByPosition(inputCommand.getTargetPosition());
-        validPieceInCommand(pieceOnPresentPosition, pieceOnTargetPosition);
+        validPieceAsPresentTurnTeam(pieceOnPresentPosition, pieceOnTargetPosition);
 
         MovePattern movePattern = MovePatternFactory.extractMovePattern(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
 
@@ -70,14 +70,14 @@ public class GameController {
 
         if (!pieceOnTargetPosition.isPresent() && !isPresentTurnTeamPiece(pieceOnTargetPosition)) {
             //해당 포지션 피스 제거
-            movePattern.calculateMoveDirectionAndCount();
+            movePattern.calculateMoveDirectionAndCount(pieceOnPresentPosition.get());
             movePattern.checkObstructionOnMovePath(this.chessBoard, pieceOnPresentPosition.get());
         }
 
         chessBoard.updatePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
     }
 
-    private void validPieceInCommand(Optional<Piece> presentPiecePosition, Optional<Piece> targetPiecePosition) {
+    private void validPieceAsPresentTurnTeam(Optional<Piece> presentPiecePosition, Optional<Piece> targetPiecePosition) {
         //현재 좌표에 현재턴인 팀의 피스가 있어야함.
         if (!presentPiecePosition.isPresent() || !isPresentTurnTeamPiece(presentPiecePosition)) {
             throw new WrongCommandException();

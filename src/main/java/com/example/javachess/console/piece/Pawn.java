@@ -1,8 +1,11 @@
 package com.example.javachess.console.piece;
 
+import com.example.javachess.console.Position.File;
 import com.example.javachess.console.Position.Position;
+import com.example.javachess.console.Position.Rank;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
+import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.move.pattern.CrossMovePattern;
 import com.example.javachess.console.move.pattern.MovePattern;
 import com.example.javachess.console.move.pattern.StraightMovePattern;
@@ -12,7 +15,6 @@ import lombok.Getter;
 public class Pawn extends Piece {
     private static final String WHITE_PAWN_NAME = "p";
     private static final String BLACK_PAWN_NAME = "P";
-//    private final List<MovePattern> pawnMovePatterns = Arrays.asList(new StraightMovePattern(), new CrossMovePattern());
 
     public Pawn(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.PAWN);
@@ -37,6 +39,7 @@ public class Pawn extends Piece {
 
     @Override
     public boolean verifyMovePattern(MovePattern movePattern) {
+        //얜 좀더 생각하고 구현하자.
         if (!(movePattern instanceof StraightMovePattern || movePattern instanceof CrossMovePattern)) {
             return false;
         }
@@ -45,13 +48,13 @@ public class Pawn extends Piece {
             return true;
         }
 
-
         return true;
     }
 
     @Override
-    public void move(MovePattern movePattern) {
-        Position position = this.position;
-        position.
+    public void move(Direction direction, int moveCount) {
+        int xPoint = direction.getXPoint();
+        int yPoint = direction.getYPoint();
+        this.position = Position.of(File.convertNumToFile(xPoint), Rank.convertNameToRank(yPoint));
     }
 }
