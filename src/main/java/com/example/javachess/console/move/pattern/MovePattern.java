@@ -40,11 +40,8 @@ public abstract class MovePattern {
         return presentPosition.getFileNumber() > targetPosition.getFileNumber();
     }
 
-    public void setDirection(Direction direction) {
+    public void initDirectionAndCount(int moveCount, Direction direction) {
         this.direction = direction;
-    }
-
-    public void setMoveCount(int moveCount) {
         this.moveCount = moveCount;
     }
 }

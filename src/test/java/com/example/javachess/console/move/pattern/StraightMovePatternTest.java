@@ -9,13 +9,11 @@ import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.common.exception.NoMatchMovePatternException;
 import com.example.javachess.console.common.exception.NotMoveTargetPositionException;
 import com.example.javachess.console.move.direction.Direction;
-import com.example.javachess.console.piece.Piece;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 
 class StraightMovePatternTest {

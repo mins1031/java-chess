@@ -22,23 +22,25 @@ public class StraightMovePattern extends MovePattern {
 
     @Override
     public void calculateMoveDirectionAndCount() {
+        int tempRankMoveCount = Math.abs(presentPosition.getRankNumber() - targetPosition.getRankNumber());
+        int tempFileMoveCount = Math.abs(presentPosition.getFileNumber() - targetPosition.getFileNumber());
         if (changeOnlyRank() && increaseRank()) {
-            initDirectionAndCount(presentPosition.getRankNumber(), targetPosition.getRankNumber(), Direction.FRONT);
+            initDirectionAndCount(tempRankMoveCount, Direction.FRONT);
             return;
         }
 
         if (changeOnlyRank() && decreaseRank()) {
-            initDirectionAndCount(presentPosition.getRankNumber(), targetPosition.getRankNumber(), Direction.BACK);
+            initDirectionAndCount(tempRankMoveCount, Direction.BACK);
             return;
         }
 
         if (changeOnlyFile() && increaseFile()) {
-            initDirectionAndCount(presentPosition.getFileNumber(), targetPosition.getFileNumber(), Direction.RIGHT);
+            initDirectionAndCount(tempFileMoveCount, Direction.RIGHT);
             return;
         }
 
         if (changeOnlyFile() && decreaseFile()) {
-            initDirectionAndCount(presentPosition.getFileNumber(), targetPosition.getFileNumber(), Direction.LEFT);
+            initDirectionAndCount(tempFileMoveCount, Direction.LEFT);
             return;
         }
 
@@ -60,12 +62,6 @@ public class StraightMovePattern extends MovePattern {
         if (pieceExpectedEmpty.isPresent()) {
             throw new NotMoveTargetPositionException();
         }
-    }
-
-    private void initDirectionAndCount(int presentNumber, int targetNumber, Direction direction) {
-        int moveCount = Math.abs(presentNumber - targetNumber);
-        setDirection(direction);
-        setMoveCount(moveCount);
     }
 
     private boolean changeOnlyRank() {
