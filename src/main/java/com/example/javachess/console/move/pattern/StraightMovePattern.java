@@ -1,9 +1,6 @@
 package com.example.javachess.console.move.pattern;
 
-import com.example.javachess.console.Position.File;
 import com.example.javachess.console.Position.Position;
-import com.example.javachess.console.Position.Rank;
-import com.example.javachess.console.Team.BlackTeam;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.common.exception.NoMatchMovePatternException;
@@ -51,11 +48,10 @@ public class StraightMovePattern extends MovePattern {
 
     @Override
     public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
-        Direction direction = this.direction;
         Position tempPosition = Position.of(this.presentPosition.getFile(), this.targetPosition.getRank());
         int moveCountExceptTargetPosition = this.moveCount - 1;
         for (int index = 0; moveCountExceptTargetPosition > index; index++) {
-            tempPosition.movePosition(direction.getXPoint(), direction.getYPoint());
+            tempPosition.movePosition(this.direction.getXPoint(), this.direction.getYPoint());
             Optional<Piece> pieceExpectedEmpty = chessBoard.findPieceByPosition(tempPosition).filter(Piece::isNotNight);
             if (pieceExpectedEmpty.isPresent()) {
                 throw new NotMoveTargetPositionException();

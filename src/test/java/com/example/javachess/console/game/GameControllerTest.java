@@ -1,7 +1,6 @@
 package com.example.javachess.console.game;
 
 import com.example.javachess.console.board.ChessBoard;
-import com.example.javachess.console.common.ScannerUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,6 @@ class GameControllerTest {
         //given
         String input = "start";
         GameController gameController = new GameController(new ChessBoard());
-        ScannerUtil.setInputWithScannerForTest(input);
 
         //when
 //        boolean startGameResult = game.startGame();
