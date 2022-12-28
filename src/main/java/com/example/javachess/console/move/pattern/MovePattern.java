@@ -22,7 +22,23 @@ public abstract class MovePattern {
 
     public abstract void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece);
 
-    public abstract void calculateMoveDirectionAndCount(Piece piece);
+    public abstract void calculateMoveDirectionAndCount();
+
+    public boolean increaseRank() {
+        return presentPosition.getRankNumber() < targetPosition.getRankNumber();
+    }
+
+    public boolean decreaseRank() {
+        return presentPosition.getRankNumber() > targetPosition.getRankNumber();
+    }
+
+    public boolean increaseFile() {
+        return presentPosition.getFileNumber() < targetPosition.getFileNumber();
+    }
+
+    public boolean decreaseFile() {
+        return presentPosition.getFileNumber() > targetPosition.getFileNumber();
+    }
 
     public void setDirection(Direction direction) {
         this.direction = direction;

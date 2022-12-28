@@ -17,10 +17,11 @@ public class CrossMovePattern extends MovePattern {
 
     @Override
     public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
+
     }
 
     @Override
-    public void calculateMoveDirectionAndCount(Piece piece) {
+    public void calculateMoveDirectionAndCount() {
 
     }
 }
