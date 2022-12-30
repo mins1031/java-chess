@@ -12,10 +12,6 @@ public class KingMovePattern extends MovePattern {
     }
 
     @Override
-    public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
-    }
-
-    @Override
     public void calculateMoveDirectionAndCount() {
 
     }

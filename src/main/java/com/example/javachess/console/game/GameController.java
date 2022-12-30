@@ -71,10 +71,10 @@ public class GameController {
         if (!pieceOnTargetPosition.isPresent() && !isPresentTurnTeamPiece(pieceOnTargetPosition)) {
             //해당 포지션 피스 제거
             movePattern.calculateMoveDirectionAndCount();
-            movePattern.checkObstructionOnMovePath(this.chessBoard, pieceOnPresentPosition.get());
+            movePattern.checkObstructionOnMovePath(this.chessBoard);
         }
 
-        chessBoard.updatePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
+        chessBoard.movePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
     }
 
     private void validPieceAsPresentTurnTeam(Optional<Piece> presentPiecePosition, Optional<Piece> targetPiecePosition) {

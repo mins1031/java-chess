@@ -43,8 +43,8 @@ public class StraightMovePattern extends MovePattern {
     }
 
     @Override
-    public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
-        Position tempPosition = Position.of(this.presentPosition.getFile(), this.targetPosition.getRank());
+    public void checkObstructionOnMovePath(ChessBoard chessBoard) {
+        Position tempPosition = Position.of(this.presentPosition.getFile(), this.presentPosition.getRank());
         int moveCountExceptTargetPosition = this.moveCount - 1;
         for (int index = 0; moveCountExceptTargetPosition > index; index++) {
             checkOneStep(chessBoard, tempPosition);

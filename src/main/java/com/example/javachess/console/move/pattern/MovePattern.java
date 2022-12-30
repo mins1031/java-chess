@@ -2,9 +2,12 @@ package com.example.javachess.console.move.pattern;
 
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.board.ChessBoard;
+import com.example.javachess.console.common.exception.NotMoveTargetPositionException;
 import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.piece.Piece;
 import lombok.Getter;
+
+import java.util.Optional;
 
 @Getter
 public abstract class MovePattern {
@@ -18,7 +21,21 @@ public abstract class MovePattern {
         this.targetPosition = targetPosition;
     }
 
-    public abstract void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece);
+    public void checkObstructionOnMovePath(ChessBoard chessBoard) {
+        Position tempPosition = Position.of(this.presentPosition.getFile(), this.presentPosition.getRank());
+        int moveCountExceptTargetPosition = this.moveCount - 1;
+        for (int index = 0; moveCountExceptTargetPosition > index; index++) {
+            checkOneStep(chessBoard, tempPosition);
+        }
+    }
+
+    private void checkOneStep(ChessBoard chessBoard, Position tempPosition) {
+        tempPosition.movePosition(this.direction.getXPoint(), this.direction.getYPoint());
+        Optional<Piece> pieceExpectedEmpty = chessBoard.findPieceByPosition(tempPosition).filter(Piece::isNotNight);
+        if (pieceExpectedEmpty.isPresent()) {
+            throw new NotMoveTargetPositionException();
+        }
+    }
 
     public abstract void calculateMoveDirectionAndCount();
 

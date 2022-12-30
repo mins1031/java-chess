@@ -38,7 +38,7 @@ public abstract class Piece {
         return this.ownTeam.getTeamType().equals(teamType);
     }
 
-    public void updatePosition(Position position) {
+    public void movePosition(Position position) {
         this.position = position;
     }
 

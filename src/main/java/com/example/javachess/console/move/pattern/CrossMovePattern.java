@@ -1,20 +1,13 @@
 package com.example.javachess.console.move.pattern;
 
 import com.example.javachess.console.Position.Position;
-import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.common.exception.WrongMatchCrossMovePatternException;
 import com.example.javachess.console.move.direction.Direction;
-import com.example.javachess.console.piece.Piece;
 
 public class CrossMovePattern extends MovePattern {
 
     public CrossMovePattern(Position presentPosition, Position targetPosition) {
         super(presentPosition, targetPosition);
-    }
-
-    @Override
-    public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
-
     }
 
     @Override

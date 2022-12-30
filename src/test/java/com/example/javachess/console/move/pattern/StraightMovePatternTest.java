@@ -116,7 +116,7 @@ class StraightMovePatternTest {
         straightMovePattern.calculateMoveDirectionAndCount();
 
         //when && then
-        Assertions.assertThatThrownBy(() -> straightMovePattern.checkObstructionOnMovePath(chessBoard, chessBoard.findPieceByPosition(presentPosition).get()))
+        Assertions.assertThatThrownBy(() -> straightMovePattern.checkObstructionOnMovePath(chessBoard))
                 .isInstanceOf(NotMoveTargetPositionException.class);
     }
 
@@ -132,7 +132,7 @@ class StraightMovePatternTest {
         straightMovePattern.calculateMoveDirectionAndCount();
 
         //when && then
-        straightMovePattern.checkObstructionOnMovePath(chessBoard, chessBoard.findPieceByPosition(presentPosition).get());
+        straightMovePattern.checkObstructionOnMovePath(chessBoard);
     }
 
 }

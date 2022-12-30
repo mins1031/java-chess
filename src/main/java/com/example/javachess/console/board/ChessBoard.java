@@ -41,12 +41,12 @@ public class ChessBoard {
                 .findFirst();
     }
 
-    public void updatePiecePosition(Position presentPosition, Position targetPosition) {
+    public void movePiecePosition(Position presentPosition, Position targetPosition) {
         Piece pieceOnCurrentPosition = pieces.stream()
                 .filter(piece -> piece.getPosition().equals(presentPosition))
                 .findFirst().orElseThrow(NotFoundPieceByPositionException::new);
 
-        pieceOnCurrentPosition.updatePosition(targetPosition);
+        pieceOnCurrentPosition.movePosition(targetPosition);
     }
 
     private void makeBoardPositions() {
