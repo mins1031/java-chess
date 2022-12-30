@@ -41,14 +41,14 @@ public class Pawn extends Piece {
     public boolean verifyMovePattern(MovePattern movePattern) {
         //얜 좀더 생각하고 구현하자.
         if (!(movePattern instanceof StraightMovePattern || movePattern instanceof CrossMovePattern)) {
-            return false;
+            return true;
         }
 
         if (movePattern instanceof CrossMovePattern) {
             return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override

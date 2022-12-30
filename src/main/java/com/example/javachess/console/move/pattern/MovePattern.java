@@ -29,14 +29,6 @@ public abstract class MovePattern {
         }
     }
 
-    private void checkOneStep(ChessBoard chessBoard, Position tempPosition) {
-        tempPosition.movePosition(this.direction.getXPoint(), this.direction.getYPoint());
-        Optional<Piece> pieceExpectedEmpty = chessBoard.findPieceByPosition(tempPosition).filter(Piece::isNotNight);
-        if (pieceExpectedEmpty.isPresent()) {
-            throw new NotMoveTargetPositionException();
-        }
-    }
-
     public abstract void calculateMoveDirectionAndCount();
 
     public boolean increaseRank() {
@@ -58,5 +50,13 @@ public abstract class MovePattern {
     public void initDirectionAndCount(int moveCount, Direction direction) {
         this.direction = direction;
         this.moveCount = moveCount;
+    }
+
+    private void checkOneStep(ChessBoard chessBoard, Position tempPosition) {
+        tempPosition.movePosition(this.direction.getXPoint(), this.direction.getYPoint());
+        Optional<Piece> pieceExpectedEmpty = chessBoard.findPieceByPosition(tempPosition).filter(Piece::isNotNight);
+        if (pieceExpectedEmpty.isPresent()) {
+            throw new NotMoveTargetPositionException();
+        }
     }
 }

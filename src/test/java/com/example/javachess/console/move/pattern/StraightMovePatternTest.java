@@ -134,5 +134,4 @@ class StraightMovePatternTest {
         //when && then
         straightMovePattern.checkObstructionOnMovePath(chessBoard);
     }
-
 }
