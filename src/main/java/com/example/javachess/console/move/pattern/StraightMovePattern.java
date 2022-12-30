@@ -16,11 +16,6 @@ public class StraightMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean isMatchToPiece(Piece piece) {
-        return true;
-    }
-
-    @Override
     public void calculateMoveDirectionAndCount() {
         int tempRankMoveCount = Math.abs(presentPosition.getRankNumber() - targetPosition.getRankNumber());
         int tempFileMoveCount = Math.abs(presentPosition.getFileNumber() - targetPosition.getFileNumber());

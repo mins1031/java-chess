@@ -18,8 +18,6 @@ public abstract class MovePattern {
         this.targetPosition = targetPosition;
     }
 
-    public abstract boolean isMatchToPiece(Piece piece);
-
     public abstract void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece);
 
     public abstract void calculateMoveDirectionAndCount();

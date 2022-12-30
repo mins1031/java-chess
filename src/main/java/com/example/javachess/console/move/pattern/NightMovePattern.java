@@ -13,12 +13,6 @@ public class NightMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean isMatchToPiece(Piece piece) {
-
-        return true;
-    }
-
-    @Override
     public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
     }
 

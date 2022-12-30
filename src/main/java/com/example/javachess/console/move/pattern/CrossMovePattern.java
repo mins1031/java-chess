@@ -13,11 +13,6 @@ public class CrossMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean isMatchToPiece(Piece piece) {
-        return true;
-    }
-
-    @Override
     public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
 
     }
@@ -60,11 +55,11 @@ public class CrossMovePattern extends MovePattern {
         return increaseRank() && decreaseFile();
     }
 
-    private boolean isSameRankAndFileMoveCount(int tempFileMoveCount, int tempRankMoveCount) {
-        return tempFileMoveCount == tempRankMoveCount;
-    }
-
     private boolean isRightAndFront() {
         return increaseFile() && increaseRank();
+    }
+
+    private boolean isSameRankAndFileMoveCount(int tempFileMoveCount, int tempRankMoveCount) {
+        return tempFileMoveCount == tempRankMoveCount;
     }
 }

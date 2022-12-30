@@ -12,11 +12,6 @@ public class KingMovePattern extends MovePattern {
     }
 
     @Override
-    public boolean isMatchToPiece(Piece piece) {
-        return false;
-    }
-
-    @Override
     public void checkObstructionOnMovePath(ChessBoard chessBoard, Piece piece) {
     }
 
