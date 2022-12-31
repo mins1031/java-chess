@@ -49,6 +49,14 @@ public class ChessBoard {
         pieceOnCurrentPosition.movePosition(targetPosition);
     }
 
+    public void removeDeadPiece(Position targetPosition) {
+        Piece deadPiece = pieces.stream()
+                .filter(piece -> piece.getPosition().equals(targetPosition))
+                .findFirst().orElseThrow(NotFoundPieceByPositionException::new);
+
+        pieces.remove(deadPiece);
+    }
+
     private void makeBoardPositions() {
         for (Rank rank : Rank.values()) {
             for (File file : File.values()) {
