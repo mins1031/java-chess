@@ -9,6 +9,7 @@ import com.example.javachess.console.move.pattern.MovePattern;
 public class Night extends Piece {
     private static final String WHITE_NIGHT_NAME = "n";
     private static final String BLACK_NIGHT_NAME = "N";
+    public static final int BASIC_MOVE_COUNT = 1;
 
     public Night(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.NIGHT);

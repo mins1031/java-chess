@@ -47,7 +47,6 @@ public class MovePatternFactory {
         int fileSubAbsValue = Math.abs(beforePosition.getFileNumber() - afterPosition.getFileNumber());
         int rankSubAbsValue = Math.abs(beforePosition.getRankNumber() - afterPosition.getRankNumber());
 
-        return (fileSubAbsValue == NightMovePattern.NIGHT_BIG_MOVE_SPACE_COUNT && rankSubAbsValue == NightMovePattern.NIGHT_SMALL_MOVE_SPACE_COUNT)
-                || (fileSubAbsValue == NightMovePattern.NIGHT_SMALL_MOVE_SPACE_COUNT && rankSubAbsValue == NightMovePattern.NIGHT_BIG_MOVE_SPACE_COUNT);
+        return NightMovePattern.isRightOrLeftMove(fileSubAbsValue, rankSubAbsValue) || NightMovePattern.isFrontOrBackMove(fileSubAbsValue, rankSubAbsValue);
     }
 }
