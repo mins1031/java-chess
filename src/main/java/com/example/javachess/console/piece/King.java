@@ -4,14 +4,16 @@ import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.move.direction.Direction;
-import com.example.javachess.console.move.pattern.CrossMovePattern;
 import com.example.javachess.console.move.pattern.MovePattern;
 import com.example.javachess.console.move.pattern.NightMovePattern;
-import com.example.javachess.console.move.pattern.StraightMovePattern;
+import lombok.Getter;
 
+@Getter
 public class King extends Piece {
     private static final String WHITE_KING_NAME = "k";
     private static final String BLACK_KING_NAME = "K";
+
+    private final double killedPoint = 0;
 
     public King(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.KING);

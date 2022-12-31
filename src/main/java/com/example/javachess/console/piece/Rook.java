@@ -11,6 +11,8 @@ public class Rook extends Piece {
     private static final String WHITE_ROOK_NAME = "r";
     private static final String BLACK_ROOK_NAME = "R";
 
+    private final double killedPoint = 5;
+
     public Rook(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.ROOK);
     }

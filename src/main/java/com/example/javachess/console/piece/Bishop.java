@@ -6,10 +6,14 @@ import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.move.pattern.CrossMovePattern;
 import com.example.javachess.console.move.pattern.MovePattern;
+import lombok.Getter;
 
+@Getter
 public class Bishop extends Piece {
     private static final String WHITE_BISHOP_NAME = "b";
     private static final String BLACK_BISHOP_NAME = "B";
+
+    private final double killedPoint = 3;
 
     public Bishop(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.BISHOP);

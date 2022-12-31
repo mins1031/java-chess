@@ -16,6 +16,8 @@ public class Pawn extends Piece {
     private static final String WHITE_PAWN_NAME = "p";
     private static final String BLACK_PAWN_NAME = "P";
 
+    private final double killedPoint = 1;
+
     public Pawn(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.PAWN);
     }

@@ -6,11 +6,15 @@ import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.move.pattern.MovePattern;
 import com.example.javachess.console.move.pattern.NightMovePattern;
+import lombok.Getter;
 
+@Getter
 public class Night extends Piece {
     private static final String WHITE_NIGHT_NAME = "n";
     private static final String BLACK_NIGHT_NAME = "N";
     public static final int BASIC_MOVE_COUNT = 1;
+
+    private final double killedPoint = 2.5;
 
     public Night(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.NIGHT);

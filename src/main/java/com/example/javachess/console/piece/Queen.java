@@ -7,10 +7,14 @@ import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.move.pattern.CrossMovePattern;
 import com.example.javachess.console.move.pattern.MovePattern;
 import com.example.javachess.console.move.pattern.StraightMovePattern;
+import lombok.Getter;
 
+@Getter
 public class Queen extends Piece {
     private static final String WHITE_QUEEN_NAME = "q";
     private static final String BLACK_QUEEN_NAME = "Q";
+
+    private final double killedPoint = 9;
 
     public Queen(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.QUEEN);
