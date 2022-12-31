@@ -4,7 +4,10 @@ import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.move.direction.Direction;
+import com.example.javachess.console.move.pattern.CrossMovePattern;
 import com.example.javachess.console.move.pattern.MovePattern;
+import com.example.javachess.console.move.pattern.NightMovePattern;
+import com.example.javachess.console.move.pattern.StraightMovePattern;
 
 public class King extends Piece {
     private static final String WHITE_KING_NAME = "k";
@@ -33,7 +36,15 @@ public class King extends Piece {
 
     @Override
     public boolean verifyMovePattern(MovePattern movePattern) {
-        return false;
+        if (movePattern instanceof NightMovePattern) {
+            return false;
+        }
+
+        if (movePattern.getMoveCount() > 1) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

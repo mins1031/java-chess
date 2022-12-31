@@ -26,7 +26,7 @@ public class GameController {
         this.chessBoard = chessBoard;
         this.blackTeamCycleCount = 0;
         this.whiteTeamCycleCount = 0;
-        this.presentTurn = TeamType.BLACK;
+        this.presentTurn = TeamType.WHITE;
     }
 
     public void startGame() {
@@ -37,10 +37,10 @@ public class GameController {
         }
 
         chessBoard.initChessBoard(BoardBasicInfo.BASIC_TEAMS_IN_CHESS);
-        onGoingChessGame(chessBoard);
+        onGoingChessGame();
     }
 
-    private void onGoingChessGame(ChessBoard chessBoard) {
+    private void onGoingChessGame() {
         while (true) {
             String command = MC.requestCommand();
             try {
@@ -48,11 +48,12 @@ public class GameController {
                 movePiece(inputCommand);
 
                 //TODO king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
+                changePresentTurn();
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
             }
 
-            changePresentTurn();
+            this.chessBoard.printPresentBoardStatus();
         }
     }
 
@@ -68,10 +69,14 @@ public class GameController {
             throw new NotMoveTargetPositionException();
         }
 
-        if (!pieceOnTargetPosition.isPresent() && !isPresentTurnTeamPiece(pieceOnTargetPosition)) {
-            //해당 포지션 피스 제거
-            movePattern.calculateMoveDirectionAndCount();
-            movePattern.checkObstructionOnMovePath(this.chessBoard);
+        movePattern.calculateMoveDirectionAndCount();
+        movePattern.checkObstructionOnMovePath(this.chessBoard);
+
+        if (pieceOnTargetPosition.isPresent()) {
+            if (isPresentTurnTeamPiece(pieceOnTargetPosition)) {
+                throw new NotMoveTargetPositionException();
+            }
+            //해당 포지션 상대 피스 제거 후 점수 증가 로직
         }
 
         chessBoard.movePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
@@ -84,7 +89,7 @@ public class GameController {
         }
 
         //목표 좌표에 현재턴인 팀의 피스가 있으면 안됨.
-        if (!targetPiecePosition.isPresent() && isPresentTurnTeamPiece(targetPiecePosition)) {
+        if (targetPiecePosition.isPresent() && isPresentTurnTeamPiece(targetPiecePosition)) {
             throw new AlreadyExistPieceInTargetPositionException();
         }
     }
@@ -94,12 +99,12 @@ public class GameController {
     }
 
     private void changePresentTurn() {
+        System.out.println("차례가 변경됩니다. " + this.presentTurn);
         if (this.presentTurn.equals(TeamType.BLACK)) {
             this.presentTurn = TeamType.WHITE;
+            return;
         }
 
-        if (this.presentTurn.equals(TeamType.WHITE)) {
-            this.presentTurn = TeamType.BLACK;
-        }
+        this.presentTurn = TeamType.BLACK;
     }
 }

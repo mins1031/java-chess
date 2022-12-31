@@ -5,6 +5,7 @@ import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.move.pattern.MovePattern;
+import com.example.javachess.console.move.pattern.NightMovePattern;
 
 public class Night extends Piece {
     private static final String WHITE_NIGHT_NAME = "n";
@@ -39,6 +40,10 @@ public class Night extends Piece {
 
     @Override
     public boolean verifyMovePattern(MovePattern movePattern) {
+        if (movePattern instanceof NightMovePattern) {
+            return true;
+        }
+
         return false;
     }
 

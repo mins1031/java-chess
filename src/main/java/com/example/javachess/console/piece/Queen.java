@@ -4,7 +4,9 @@ import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Team.Team;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.move.direction.Direction;
+import com.example.javachess.console.move.pattern.CrossMovePattern;
 import com.example.javachess.console.move.pattern.MovePattern;
+import com.example.javachess.console.move.pattern.StraightMovePattern;
 
 public class Queen extends Piece {
     private static final String WHITE_QUEEN_NAME = "q";
@@ -33,6 +35,10 @@ public class Queen extends Piece {
 
     @Override
     public boolean verifyMovePattern(MovePattern movePattern) {
+        if (movePattern instanceof StraightMovePattern || movePattern instanceof CrossMovePattern) {
+            return true;
+        }
+
         return false;
     }
 

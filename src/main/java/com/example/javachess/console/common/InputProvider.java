@@ -7,10 +7,10 @@ public class InputProvider {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String isStartGame() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public static String inputCommand() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

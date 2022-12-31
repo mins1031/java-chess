@@ -17,6 +17,7 @@ public class NightMovePattern extends MovePattern {
 
     @Override
     public void checkObstructionOnMovePath(ChessBoard chessBoard) {
+        return;
     }
 
     @Override
