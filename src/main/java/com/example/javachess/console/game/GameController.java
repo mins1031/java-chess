@@ -3,6 +3,7 @@ package com.example.javachess.console.game;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.board.BoardBasicInfo;
 import com.example.javachess.console.board.ChessBoard;
+import com.example.javachess.console.board.OutsideOfBoard;
 import com.example.javachess.console.command.InputCommand;
 import com.example.javachess.console.common.StringParser;
 import com.example.javachess.console.common.GameStatusManager;
@@ -88,7 +89,20 @@ public class GameController {
                 throw new NotKillKingPieceException();
             }
 
+            chessBoard.removeDeadPiece(inputCommand.getTargetPosition());
 
+            //이넘에 함수형 인터페이스로 분기로직 수행.
+            targetPiece.getOwnTeam().getTeamType().getConsumer().accept(targetPiece);
+
+            if (targetPiece.getOwnTeam().getTeamType().equals(TeamType.BLACK)) {
+                OutsideOfBoard.addDeadPieceThatBlackTeam(targetPiece);
+            }
+
+            if (targetPiece.getOwnTeam().getTeamType().equals(TeamType.WHITE)) {
+                OutsideOfBoard.addDeadPieceThatWhiteTeam(targetPiece);
+            }
+
+            //+ 피스별 알맞는 점수로직도 추가.
         }
 
         chessBoard.movePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
