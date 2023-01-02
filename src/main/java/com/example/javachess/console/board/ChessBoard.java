@@ -4,6 +4,7 @@ import com.example.javachess.console.Position.File;
 import com.example.javachess.console.Position.Position;
 import com.example.javachess.console.Position.Rank;
 import com.example.javachess.console.Team.Team;
+import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.common.exception.NotFoundPieceByPositionException;
 import com.example.javachess.console.piece.Piece;
 import com.example.javachess.console.piece.PieceInitFacade;

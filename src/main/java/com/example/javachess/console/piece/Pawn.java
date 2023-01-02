@@ -49,9 +49,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void move(Direction direction, int moveCount) {
-        int xPoint = direction.getXPoint();
-        int yPoint = direction.getYPoint();
-        this.position = Position.of(File.convertNumToFile(xPoint), Rank.convertNameToRank(yPoint));
+    public double getPiecePoint() {
+        return this.killedPoint;
     }
 }

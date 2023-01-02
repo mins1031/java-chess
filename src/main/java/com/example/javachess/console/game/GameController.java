@@ -3,7 +3,6 @@ package com.example.javachess.console.game;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.board.BoardBasicInfo;
 import com.example.javachess.console.board.ChessBoard;
-import com.example.javachess.console.board.OutsideOfBoard;
 import com.example.javachess.console.command.InputCommand;
 import com.example.javachess.console.common.StringParser;
 import com.example.javachess.console.common.GameStatusManager;
@@ -22,14 +21,14 @@ import java.util.Optional;
 public class GameController {
 
     private ChessBoard chessBoard;
-    private int blackTeamCycleCount;
-    private int whiteTeamCycleCount;
+    private int blackTeamDeadPoint;
+    private int whiteTeamDeadPoint;
     private TeamType presentTurn;
 
     public GameController(ChessBoard chessBoard) {
         this.chessBoard = chessBoard;
-        this.blackTeamCycleCount = 0;
-        this.whiteTeamCycleCount = 0;
+        this.blackTeamDeadPoint = 0;
+        this.whiteTeamDeadPoint = 0;
         this.presentTurn = TeamType.WHITE;
     }
 
@@ -80,8 +79,7 @@ public class GameController {
             if (isPresentTurnTeamPiece(pieceOnTargetPosition)) {
                 throw new NotMoveTargetPositionException();
             }
-            //해당 포지션 상대 피스 제거 후 점수 증가 로직
-            // + 킹은 상대 퀸과 킹을 잡지 못한다
+
             Piece presentPiece = pieceOnPresentPosition.get();
             Piece targetPiece = pieceOnTargetPosition.get();
 
@@ -90,19 +88,15 @@ public class GameController {
             }
 
             chessBoard.removeDeadPiece(inputCommand.getTargetPosition());
-
-            //이넘에 함수형 인터페이스로 분기로직 수행.
-            targetPiece.getOwnTeam().getTeamType().getConsumer().accept(targetPiece);
-
-            if (targetPiece.getOwnTeam().getTeamType().equals(TeamType.BLACK)) {
-                OutsideOfBoard.addDeadPieceThatBlackTeam(targetPiece);
+            if (this.presentTurn.equals(TeamType.BLACK)) {
+                blackTeamDeadPoint += targetPiece.getPiecePoint();
             }
 
-            if (targetPiece.getOwnTeam().getTeamType().equals(TeamType.WHITE)) {
-                OutsideOfBoard.addDeadPieceThatWhiteTeam(targetPiece);
+            if (this.presentTurn.equals(TeamType.WHITE)) {
+                whiteTeamDeadPoint += targetPiece.getPiecePoint();
             }
 
-            //+ 피스별 알맞는 점수로직도 추가.
+            targetPiece.addDeadPieceInCemetery();
         }
 
         chessBoard.movePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());

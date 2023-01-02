@@ -13,7 +13,7 @@ public class Bishop extends Piece {
     private static final String WHITE_BISHOP_NAME = "b";
     private static final String BLACK_BISHOP_NAME = "B";
 
-    private final double killedPoint = 3;
+    private final double piecePoint = 3;
 
     public Bishop(Team ownTeam, Position position) {
         super(ownTeam, position, PieceName.BISHOP);
@@ -40,6 +40,11 @@ public class Bishop extends Piece {
     @Override
     public void move(Direction direction, int moveCount) {
 
+    }
+
+    @Override
+    public double getPiecePoint() {
+        return this.piecePoint;
     }
 
     @Override

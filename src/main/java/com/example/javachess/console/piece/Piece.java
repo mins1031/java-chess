@@ -28,7 +28,7 @@ public abstract class Piece {
     //verifyMovePattern 의 경우 패턴 뿐만 아니라 포지션 데이터도 받아야할것같다. 이걸 여기서 파리미터로 받느냐 아니면 패턴객체에 들고있냐는 고민을 해봐야 할듯.
     public abstract boolean verifyMovePattern(MovePattern movePattern);
 
-    public abstract void move(Direction direction, int moveCount);
+    public abstract double getPiecePoint();
 
     public boolean isNotNight() {
         return true;
@@ -36,6 +36,11 @@ public abstract class Piece {
 
     public boolean compareTeamType(TeamType teamType) {
         return this.ownTeam.getTeamType().equals(teamType);
+    }
+
+    public void addDeadPieceInCemetery() {
+        TeamType teamType = this.getOwnTeam().getTeamType();
+        teamType.getConsumer().accept(this);
     }
 
     public void movePosition(Position position) {

@@ -6,7 +6,9 @@ import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.move.direction.Direction;
 import com.example.javachess.console.move.pattern.MovePattern;
 import com.example.javachess.console.move.pattern.StraightMovePattern;
+import lombok.Getter;
 
+@Getter
 public class Rook extends Piece {
     private static final String WHITE_ROOK_NAME = "r";
     private static final String BLACK_ROOK_NAME = "R";
@@ -44,7 +46,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void move(Direction direction, int moveCount) {
-
+    public double getPiecePoint() {
+        return this.killedPoint;
     }
 }

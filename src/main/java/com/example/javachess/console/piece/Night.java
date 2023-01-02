@@ -52,7 +52,7 @@ public class Night extends Piece {
     }
 
     @Override
-    public void move(Direction direction, int moveCount) {
-
+    public double getPiecePoint() {
+        return this.killedPoint;
     }
 }
