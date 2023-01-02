@@ -3,6 +3,7 @@ package com.example.javachess.console.game;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.board.BoardBasicInfo;
 import com.example.javachess.console.board.ChessBoard;
+import com.example.javachess.console.board.GameStatusBoard;
 import com.example.javachess.console.command.InputCommand;
 import com.example.javachess.console.common.StringParser;
 import com.example.javachess.console.common.GameStatusManager;
@@ -21,14 +22,12 @@ import java.util.Optional;
 public class GameController {
 
     private ChessBoard chessBoard;
-    private int blackTeamDeadPoint;
-    private int whiteTeamDeadPoint;
+    private GameStatusBoard gameStatusBoard;
     private TeamType presentTurn;
 
     public GameController(ChessBoard chessBoard) {
         this.chessBoard = chessBoard;
-        this.blackTeamDeadPoint = 0;
-        this.whiteTeamDeadPoint = 0;
+        this.gameStatusBoard = new GameStatusBoard();
         this.presentTurn = TeamType.WHITE;
     }
 
@@ -61,45 +60,49 @@ public class GameController {
     }
 
     private void movePiece(InputCommand inputCommand) {
-        // 명령을 받는다 -> 이동가능한지 파악한다. -> [해당 피스가 해당 위치로 이동이 가능한지, 목표위치에 우리팀 피스가 있는지 없는지, 이동길목에 피스가 있는지, 목표위치에 상대팀 피스가 있는지 (피스 잡음)] -> 이동
         Optional<Piece> pieceOnPresentPosition = chessBoard.findPieceByPosition(inputCommand.getPresentPosition());
         Optional<Piece> pieceOnTargetPosition = chessBoard.findPieceByPosition(inputCommand.getTargetPosition());
+
         validPieceAsPresentTurnTeam(pieceOnPresentPosition, pieceOnTargetPosition);
+        validCanMoveTargetPosition(inputCommand, pieceOnPresentPosition, pieceOnTargetPosition);
+        chessBoard.movePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
+    }
 
+    private void validCanMoveTargetPosition(InputCommand inputCommand, Optional<Piece> pieceOnPresentPosition, Optional<Piece> pieceOnTargetPosition) {
         MovePattern movePattern = MovePatternFactory.extractMovePattern(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
-
         if (!pieceOnPresentPosition.get().verifyMovePattern(movePattern)) {
             throw new NotMoveTargetPositionException();
         }
 
         movePattern.calculateMoveDirectionAndCount();
         movePattern.checkObstructionOnMovePath(this.chessBoard);
-
         if (pieceOnTargetPosition.isPresent()) {
-            if (isPresentTurnTeamPiece(pieceOnTargetPosition)) {
-                throw new NotMoveTargetPositionException();
-            }
+            removeTargetPiece(inputCommand, pieceOnPresentPosition, pieceOnTargetPosition);
+        }
+    }
 
-            Piece presentPiece = pieceOnPresentPosition.get();
-            Piece targetPiece = pieceOnTargetPosition.get();
-
-            if (presentPiece instanceof King && (targetPiece instanceof Queen || targetPiece instanceof King)) {
-                throw new NotKillKingPieceException();
-            }
-
-            chessBoard.removeDeadPiece(inputCommand.getTargetPosition());
-            if (this.presentTurn.equals(TeamType.BLACK)) {
-                blackTeamDeadPoint += targetPiece.getPiecePoint();
-            }
-
-            if (this.presentTurn.equals(TeamType.WHITE)) {
-                whiteTeamDeadPoint += targetPiece.getPiecePoint();
-            }
-
-            targetPiece.addDeadPieceInCemetery();
+    private void removeTargetPiece(InputCommand inputCommand, Optional<Piece> pieceOnPresentPosition, Optional<Piece> pieceOnTargetPosition) {
+        if (isPresentTurnTeamPiece(pieceOnTargetPosition)) {
+            throw new NotMoveTargetPositionException();
         }
 
-        chessBoard.movePiecePosition(inputCommand.getPresentPosition(), inputCommand.getTargetPosition());
+        Piece presentPiece = pieceOnPresentPosition.get();
+        Piece targetPiece = pieceOnTargetPosition.get();
+
+        validKingRuleByKilledPiece(presentPiece, targetPiece);
+        removeProcess(inputCommand, targetPiece);
+    }
+
+    private void removeProcess(InputCommand inputCommand, Piece targetPiece) {
+        chessBoard.removeDeadPiece(inputCommand.getTargetPosition());
+        gameStatusBoard.addDeadPiece(targetPiece);
+        gameStatusBoard.plusTeamDeadPoint(targetPiece.getOwnTeam().getTeamType(), targetPiece.getPiecePoint());
+    }
+
+    private void validKingRuleByKilledPiece(Piece presentPiece, Piece targetPiece) {
+        if (presentPiece instanceof King && (targetPiece instanceof Queen || targetPiece instanceof King)) {
+            throw new NotKillKingPieceException();
+        }
     }
 
     private void validPieceAsPresentTurnTeam(Optional<Piece> presentPiecePosition, Optional<Piece> targetPiecePosition) {
