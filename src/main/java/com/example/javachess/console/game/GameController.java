@@ -5,6 +5,7 @@ import com.example.javachess.console.board.BoardBasicInfo;
 import com.example.javachess.console.board.ChessBoard;
 import com.example.javachess.console.board.GameStatusBoard;
 import com.example.javachess.console.command.InputCommand;
+import com.example.javachess.console.common.OutputProvider;
 import com.example.javachess.console.common.StringParser;
 import com.example.javachess.console.common.GameStatusManager;
 import com.example.javachess.console.common.exception.AlreadyExistPieceInTargetPositionException;
@@ -40,21 +41,23 @@ public class GameController {
 
         chessBoard.initChessBoard(BoardBasicInfo.BASIC_TEAMS_IN_CHESS);
         onGoingChessGame();
+        gameStatusBoard.guideGamePointEachTeam();
     }
 
-    private void onGoingChessGame() {
+    public void onGoingChessGame() {
         while (true) {
             String command = MC.requestCommand();
             try {
                 InputCommand inputCommand = StringParser.inputCommandParser(command);
                 movePiece(inputCommand);
-
-                //TODO king이 잡혔는지 아닌지 확인해줄 검증 메서드가 마지막에 필요. -> 체크메이트인지 확인후 while문 탈출
+                if (gameStatusBoard.isCheckMate()) {
+                    System.out.println("체크메이트 입니다." + this.presentTurn.getName() + "팀의 승리 입니다. 게임이 종료됩니다.");
+                    break;
+                }
                 changePresentTurn();
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
             }
-
             this.chessBoard.printPresentBoardStatus();
         }
     }

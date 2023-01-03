@@ -3,10 +3,12 @@ package com.example.javachess.console.board;
 import com.example.javachess.console.Team.TeamType;
 import com.example.javachess.console.common.exception.NoAddOtherTeamPieceException;
 import com.example.javachess.console.piece.Piece;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class GameStatusBoard {
 
     private List<Piece> blackTeamDeadPieces;
@@ -57,5 +59,18 @@ public class GameStatusBoard {
         }
 
         this.whiteTeamDeadPoint += deadPoint;
+    }
+
+    public void guideGamePointEachTeam() {
+        System.out.println("블랙팀 : " + this.blackTeamDeadPoint);
+        System.out.println("화이트 팀 : " + this.whiteTeamDeadPoint);
+
+        if (this.whiteTeamDeadPoint > this.blackTeamDeadPoint) {
+            System.out.println("블랙팀 승리");
+        }
+
+        if (this.whiteTeamDeadPoint < this.blackTeamDeadPoint) {
+            System.out.println("화이트팀 승리");
+        }
     }
 }
