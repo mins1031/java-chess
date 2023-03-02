@@ -37,10 +37,10 @@ public class Bishop extends Piece {
         return false;
     }
 
-    @Override
-    public void move(Direction direction, int moveCount) {
-
-    }
+//    @Override
+//    public void move(Direction direction, int moveCount) {
+//
+//    }
 
     @Override
     public double getPiecePoint() {
